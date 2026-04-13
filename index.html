@@ -606,6 +606,7 @@
     if(w.classList.contains('on')){w.classList.remove('on');reveal.classList.remove('on');return}
     cloud.querySelectorAll('.cw').forEach(x=>x.classList.remove('on'));
     w.classList.add('on');qEl.textContent=w.dataset.quote;spEl.textContent='— '+w.dataset.speaker;reveal.classList.add('on');
+    setTimeout(()=>{reveal.scrollIntoView({behavior:'smooth',block:'nearest'})},100);
   });
 
 })();

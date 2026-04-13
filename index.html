@@ -618,15 +618,19 @@
   const tlEl=document.getElementById('timeline');
   const tlDots=document.querySelectorAll('.tl-dot[data-idx]');
   tlDots.forEach((d,i)=>{d.style.animationDelay=(i*0.6)+'s'});
+  let tlTimer=null;
   const tlObs=new IntersectionObserver(es=>{es.forEach(e=>{
     if(e.isIntersecting){
-      tlFill.style.transition='height 3s ease-in-out';
-      tlFill.style.height='100%';
+      tlTimer=setTimeout(()=>{
+        tlFill.style.transition='height 3s ease-in-out';
+        tlFill.style.height='100%';
+      },800);
     } else {
+      clearTimeout(tlTimer);
       tlFill.style.transition='none';
       tlFill.style.height='0';
     }
-  })},{threshold:0.2});
+  })},{threshold:0.4});
   tlObs.observe(tlEl);
 
   /* ── CAROUSEL (JS requestAnimationFrame) ── */

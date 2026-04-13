@@ -552,13 +552,13 @@
     w.classList.add(Math.random()>0.5?'c-blue':'c-green');
   });
   setInterval(()=>{
-    for(let i=0;i<2;i++){
+    for(let i=0;i<4;i++){
       const idx=Math.floor(Math.random()*allCW.length);
       const w=allCW[idx];
       if(w.classList.contains('on'))continue;
       w.classList.toggle('c-blue');w.classList.toggle('c-green');
     }
-  },1200);
+  },500);
 
   /* ── WORD CLOUD ── */
   document.addEventListener('click',e=>{

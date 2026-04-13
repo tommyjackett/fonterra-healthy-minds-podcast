@@ -75,34 +75,26 @@
 
   /* ═══════════ JOURNEY ═══════════ */
   .journey{background:var(--white);padding:72px 24px 80px;border-bottom:1px solid var(--line)}
-  .journey .container{max-width:960px;margin:0 auto}
-  .j-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
-  .j-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(24px,4vw,38px);font-weight:400;color:var(--blue);margin-bottom:8px;letter-spacing:-0.02em}
-  .j-sub{font-size:15px;color:var(--ink-soft);max-width:540px;margin-bottom:48px;line-height:1.6}
+  .journey .container{max-width:960px;margin:0 auto;text-align:center}
+  .j-eyebrow{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,5vw,42px);font-weight:600;color:var(--blue);margin-bottom:12px;letter-spacing:-0.02em}
+  .j-sub{font-size:15px;color:var(--ink-soft);max-width:540px;margin:0 auto 48px;line-height:1.6}
 
-  .timeline{position:relative;padding-left:44px}
-  .timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--line);border-radius:2px}
-  .tl-fill{position:absolute;left:13px;top:8px;width:2px;height:0;background:linear-gradient(to bottom,var(--green),var(--blue));border-radius:2px;
-    box-shadow:0 0 6px rgba(114,191,68,0.3);
+  .timeline{position:relative;display:flex;flex-direction:column;align-items:center}
+  .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line);border-radius:2px;transform:translateX(-50%)}
+  .tl-fill{position:absolute;left:50%;top:0;width:2px;height:0;background:linear-gradient(to bottom,var(--green),var(--blue));border-radius:2px;
+    transform:translateX(-50%);box-shadow:0 0 6px rgba(114,191,68,0.3);
     animation:tl-trail 6s ease-in-out infinite}
   .tl-fill::after{content:'';position:absolute;bottom:0;left:-3px;width:8px;height:8px;
     border-radius:50%;background:var(--green);
     box-shadow:0 0 10px rgba(114,191,68,0.5)}
   @keyframes tl-trail{0%{height:0}80%{height:100%}100%{height:100%}}
 
-  .tl-stop{position:relative;padding-bottom:32px;opacity:0.4;transform:translateX(-8px);transition:all 0.5s ease}
-  .tl-stop:last-child{padding-bottom:0}
-  .tl-stop.active{opacity:1;transform:translateX(0)}
-  .tl-dot{
-    position:absolute;left:-39px;top:4px;width:16px;height:16px;
-    border-radius:50%;border:2.5px solid var(--line);background:var(--white);
-    z-index:2;transition:all 0.4s;
-  }
-  .tl-stop.active .tl-dot{border-color:var(--green);background:var(--green);box-shadow:0 0 0 4px rgba(114,191,68,0.15)}
-  .tl-season{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:3px}
-  .tl-name{font-family:'Fraunces',Georgia,serif;font-size:clamp(18px,3vw,26px);font-weight:400;color:var(--blue);margin-bottom:3px;letter-spacing:-0.01em}
+  .tl-stop{position:relative;z-index:2;padding:12px 24px;text-align:center;opacity:0.4;transition:all 0.5s ease}
+  .tl-stop.active{opacity:1}
+  .tl-season{font-size:clamp(14px,2.5vw,17px);font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+  .tl-name{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,3.5vw,30px);font-weight:400;color:var(--blue);margin-bottom:4px;letter-spacing:-0.01em;background:var(--white);display:inline-block;padding:0 16px;position:relative}
   .tl-meta{font-size:12px;color:var(--ink-soft);margin-bottom:6px}
-  .tl-desc{font-size:13px;color:var(--ink-soft);line-height:1.55;max-width:440px}
+  .tl-desc{font-size:13px;color:var(--ink-soft);line-height:1.55;max-width:440px;margin:0 auto}
 
   /* ═══════════ SEASON SECTIONS ═══════════ */
   .season-section{padding:72px 24px 80px;position:relative}
@@ -248,8 +240,7 @@
     .cloud{height:clamp(340px,75vw,440px)}
     .cw.xl{font-size:26px}.cw.lg{font-size:20px}.cw.md{font-size:16px}.cw.sm{font-size:14px}
     .wb{padding:24px 20px}
-    .timeline{padding-left:36px}
-    .tl-dot{left:-31px;width:14px;height:14px}
+    .tl-stop{padding:10px 16px}
     .intro-logo-main{width:min(94vw,560px);margin-bottom:-40px}
   }
 </style>
@@ -287,15 +278,14 @@
 <!-- ═══ JOURNEY ═══ -->
 <section class="journey" id="journey">
   <div class="container">
-    <div class="j-eyebrow fi">The Journey</div>
-    <h2 class="j-title fi">Four years. One continuing conversation.</h2>
-    <p class="j-sub fi">Each season took the conversation deeper. Together they tell the story of what changes when a workplace keeps showing up — and goes further every time.</p>
+    <h2 class="j-eyebrow fi">The Journey</h2>
+    <p class="j-sub fi">Four years. One continuing conversation. Each season took the conversation deeper — together they tell the story of what changes when a workplace keeps showing up.</p>
     <div class="timeline fi" id="timeline">
       <div class="tl-fill" id="tlFill"></div>
-      <div class="tl-stop" data-idx="0"><div class="tl-dot"></div><div class="tl-season">Season 1</div><div class="tl-name">Break the Silence</div><div class="tl-meta">2022 · 7 guests</div><div class="tl-desc">The first brave step. Fonterra people sharing lived experience for the first time.</div></div>
-      <div class="tl-stop" data-idx="1"><div class="tl-dot"></div><div class="tl-season">Season 2</div><div class="tl-name">Identity &amp; Rebuilding</div><div class="tl-meta">2023 · 5 guests</div><div class="tl-desc">From disclosure to reconstruction. Wrestling with who you are outside the roles you've built.</div></div>
-      <div class="tl-stop" data-idx="2"><div class="tl-dot"></div><div class="tl-season">Season 3</div><div class="tl-name">Tools &amp; Prevention</div><div class="tl-meta">2024 · 6 guests</div><div class="tl-desc">The pivot from "tell your story" to "here's what actually helps."</div></div>
-      <div class="tl-stop" data-idx="3"><div class="tl-dot"></div><div class="tl-season">Season 4</div><div class="tl-name">Leadership as Practice</div><div class="tl-meta">2025 · 6 guests</div><div class="tl-desc">The mirror turns to leaders. The way you show up is already teaching your team what's allowed.</div></div>
+      <div class="tl-stop" data-idx="0"><div class="tl-season">Season 1</div><div class="tl-name">Break the Silence</div><div class="tl-meta">2022 · 7 guests</div><div class="tl-desc">The first brave step. Fonterra people sharing lived experience for the first time.</div></div>
+      <div class="tl-stop" data-idx="1"><div class="tl-season">Season 2</div><div class="tl-name">Identity &amp; Rebuilding</div><div class="tl-meta">2023 · 5 guests</div><div class="tl-desc">From disclosure to reconstruction. Wrestling with who you are outside the roles you've built.</div></div>
+      <div class="tl-stop" data-idx="2"><div class="tl-season">Season 3</div><div class="tl-name">Tools &amp; Prevention</div><div class="tl-meta">2024 · 6 guests</div><div class="tl-desc">The pivot from "tell your story" to "here's what actually helps."</div></div>
+      <div class="tl-stop" data-idx="3"><div class="tl-season">Season 4</div><div class="tl-name">Leadership as Practice</div><div class="tl-meta">2025 · 6 guests</div><div class="tl-desc">The mirror turns to leaders. The way you show up is already teaching your team what's allowed.</div></div>
     </div>
   </div>
 </section>

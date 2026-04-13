@@ -606,7 +606,7 @@
     if(w.classList.contains('on')){w.classList.remove('on');reveal.classList.remove('on');return}
     cloud.querySelectorAll('.cw').forEach(x=>x.classList.remove('on'));
     w.classList.add('on');qEl.textContent=w.dataset.quote;spEl.textContent='— '+w.dataset.speaker;reveal.classList.add('on');
-    setTimeout(()=>{reveal.scrollIntoView({behavior:'smooth',block:'nearest'})},100);
+    setTimeout(()=>{const label=section.querySelector('.cl-label');if(label){label.scrollIntoView({behavior:'smooth',block:'start'})}else{reveal.scrollIntoView({behavior:'smooth',block:'start'})}},100);
   });
 
 })();

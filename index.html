@@ -167,7 +167,7 @@
   .cl-label{font-size:clamp(15px,2.5vw,18px);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);opacity:0.7;margin-bottom:6px;text-align:center}
   .cl-hint{font-size:clamp(14px,2.2vw,16px);color:var(--ink-soft);margin-bottom:20px;text-align:center}
   .cloud{
-    position:relative;width:100%;height:clamp(340px,65vw,460px);
+    position:relative;z-index:1;width:100%;height:clamp(340px,65vw,460px);
     background:url('assets/bg-texture.png') center/cover no-repeat;
     border-radius:16px;
     padding:24px;overflow:hidden;
@@ -191,9 +191,9 @@
   .cw.c-green{color:#4a9e1e !important;text-shadow:0 1px 3px rgba(0,0,0,0.4),0 0 6px rgba(0,0,0,0.15) !important}
   .cw.c-blue{color:var(--blue) !important}
 
-  .cr{max-height:0;overflow:hidden;transition:max-height 0.4s,opacity 0.3s;opacity:0;width:100%}
+  .cr{max-height:0;overflow:hidden;transition:max-height 0.4s,opacity 0.3s;opacity:0;width:100%;position:relative;z-index:10}
   .cr.on{max-height:200px;opacity:1;margin-top:12px}
-  .cr-in{background:var(--white);border-left:3px solid var(--green);padding:16px 20px;border-radius:0 8px 8px 0;box-shadow:0 6px 24px rgba(28,44,83,0.18),0 2px 6px rgba(28,44,83,0.1)}
+  .cr-in{background:var(--white);border-left:3px solid var(--green);padding:16px 20px;border-radius:0 8px 8px 0;box-shadow:0 8px 24px rgba(28,44,83,0.16)}
   .cr-in q{font-family:'Fraunces',Georgia,serif;font-size:15px;font-weight:400;line-height:1.55;color:var(--ink);display:block;margin-bottom:5px;quotes:"\201C" "\201D";font-style:italic}
   .cr-in .sp{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green)}
 

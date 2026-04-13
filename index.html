@@ -50,7 +50,7 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      pointer-events: none;
+      pointer-events: auto;
     }
 
     .intro-content {
@@ -75,9 +75,10 @@
     }
 
     .intro-logo {
-      width: min(92vw, 600px);
+      width: min(95vw, 640px);
       height: auto;
       object-fit: contain;
+      padding: 0 12px;
       animation: introLogoIn 0.8s ease-out forwards;
     }
 
@@ -93,9 +94,9 @@
     }
 
     .intro-tagline {
-      margin-top: 12px;
+      margin-top: 8px;
       text-align: center;
-      animation: introTaglineIn 0.8s ease-out 1.4s both;
+      animation: introTaglineIn 0.6s ease-out 0.8s both;
     }
 
     @keyframes introTaglineIn {
@@ -120,13 +121,13 @@
     }
 
     .intro-vidpod {
-      margin-top: 60px;
+      margin-top: 24px;
       text-align: center;
       font-size: 14px;
       color: #999;
       max-width: 280px;
       line-height: 1.5;
-      animation: introVidpodIn 0.6s ease-out 5.2s both;
+      animation: introVidpodIn 0.6s ease-out 2.5s both;
     }
 
     @keyframes introVidpodIn {
@@ -139,7 +140,8 @@
     }
 
     .intro.fade-out {
-      animation: introFadeOut 0.8s ease-out 6.2s both;
+      animation: introFadeOut 0.8s ease-out forwards;
+      pointer-events: none;
     }
 
     @keyframes introFadeOut {
@@ -191,6 +193,21 @@
       max-width: 600px;
     }
 
+    .hero-from {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      max-width: 400px;
+      line-height: 1.6;
+      animation: heroFromIn 0.8s ease-out 4.0s both;
+    }
+    .hero-from strong { font-weight: 600; color: rgba(255,255,255,0.7); }
+
+    @keyframes heroFromIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero-artwork {
       width: min(280px, 90vw);
       height: auto;
@@ -198,7 +215,7 @@
       margin-bottom: 40px;
       object-fit: cover;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      animation: heroArtworkIn 0.8s ease-out 7.5s both;
+      animation: heroArtworkIn 0.8s ease-out 4.2s both;
     }
 
     @keyframes heroArtworkIn {
@@ -217,7 +234,7 @@
       line-height: 1.3;
       margin-bottom: 30px;
       font-weight: 700;
-      animation: heroHeadlineIn 0.8s ease-out 7.8s both;
+      animation: heroHeadlineIn 0.8s ease-out 4.5s both;
     }
 
     @keyframes heroHeadlineIn {
@@ -242,7 +259,7 @@
       left: 0;
       height: 3px;
       background: #fff;
-      animation: braverUnderline 2s ease-out 8.2s both;
+      animation: braverUnderline 2s ease-out 5.0s both;
     }
 
     @keyframes braverUnderline {
@@ -263,7 +280,7 @@
       gap: 30px;
       margin-top: 40px;
       font-size: 14px;
-      animation: statsIn 0.8s ease-out 8.5s both;
+      animation: statsIn 0.8s ease-out 5.2s both;
     }
 
     @keyframes statsIn {
@@ -1005,13 +1022,13 @@
         <div class="intro-tagline-bold">Creating a Mentally Healthy Fonterra Family</div>
         <div class="intro-tagline-sub">A Podcast Series</div>
       </div>
-      <div class="intro-vidpod">From your production partners at VidPod — a place to see and reflect on the journey so far</div>
     </div>
   </div>
 
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-content">
+      <div class="hero-from">From your production partners at VidPod — a place to see and reflect on the journey so far</div>
       <img src="assets/artwork.png" alt="Healthy Minds Podcast Artwork" class="hero-artwork">
       <h1 class="hero-headline">
         Four seasons. One conversation that keeps getting <span class="braver-word">braver.<span class="braver-underline"></span></span>
@@ -1333,7 +1350,7 @@
         setTimeout(() => {
           intro.style.display = 'none';
         }, 800);
-      }, 6200);
+      }, 3500);
     });
 
     // HERO STATS COUNTING

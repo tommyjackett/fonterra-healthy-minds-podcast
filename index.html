@@ -30,7 +30,7 @@
   .intro-content{position:relative;z-index:2;text-align:center;padding:0 20px;
     display:flex;flex-direction:column;align-items:center;
     opacity:0;transform:scale(0.97);animation:intro-in 1.2s ease 0.15s forwards}
-  .intro-logo-main{width:min(80vw,480px);height:auto;display:block;margin:0 auto 0}
+  .intro-logo-main{width:min(90vw,560px);height:auto;display:block;margin:0 auto -12px}
   .intro-tagline{
     font-size:clamp(13px,2.8vw,16px);color:var(--blue);font-weight:300;
     letter-spacing:0.02em;line-height:1.45;max-width:280px;margin:0 auto;
@@ -61,14 +61,13 @@
   }
   .hero-title em{font-style:italic;font-weight:300;color:var(--green-soft)}
   .hero-highlight{
-    position:relative;display:inline;padding:0 2px;
+    position:relative;display:inline;padding:2px 6px;
+    background:linear-gradient(to right,rgba(255,255,255,0.3),rgba(255,255,255,0.3));
+    background-size:0% 100%;background-repeat:no-repeat;background-position:left;
+    animation:highlight-fill 1.5s ease 1.2s forwards;
+    border-radius:4px;
   }
-  .hero-highlight::after{
-    content:'';position:absolute;left:0;bottom:2px;height:3px;width:0;
-    background:#FFFFFF;border-radius:2px;
-    animation:underline-draw 1.8s ease 1.2s forwards;
-  }
-  @keyframes underline-draw{to{width:100%}}
+  @keyframes highlight-fill{to{background-size:100% 100%}}
   .hero-sub{font-size:clamp(14px,1.4vw,16px);max-width:480px;opacity:0.6;line-height:1.65;margin-bottom:36px;font-weight:300;text-align:center}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:480px;width:100%;padding-top:24px;border-top:1px solid rgba(251,248,243,0.15);text-align:center}
   .stat-num{font-family:'Fraunces',Georgia,serif;font-size:clamp(30px,5vw,48px);font-weight:300;line-height:1;color:var(--cream);margin-bottom:3px}
@@ -163,12 +162,12 @@
   .cl-label{font-size:clamp(13px,2vw,15px);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);opacity:0.6;margin-bottom:4px}
   .cl-hint{font-size:clamp(12px,1.8vw,14px);color:var(--ink-soft);margin-bottom:18px}
   .cloud{
-    position:relative;width:100%;max-width:600px;height:clamp(240px,45vw,340px);
+    position:relative;width:100%;max-width:600px;height:clamp(300px,60vw,420px);
   }
   .cw{
     position:absolute;font-weight:700;color:var(--blue);cursor:pointer;
     padding:5px 12px;border-radius:100px;border:1.5px solid transparent;
-    transition:background 0.2s,color 0.2s,border-color 0.2s;line-height:1.2;user-select:none;-webkit-user-select:none;
+    transition:background 0.3s,color 0.8s,border-color 0.3s;line-height:1.2;user-select:none;-webkit-user-select:none;
     white-space:nowrap;transform:translate(-50%,-50%);
     animation:cw-float var(--float-dur,4s) ease-in-out var(--float-del,0s) infinite;
   }
@@ -236,12 +235,12 @@
     .hero{padding:40px 16px 32px;min-height:92vh}
     .season-section{padding:56px 20px 68px}
     .car-item{flex:0 0 180px}
-    .cloud{height:clamp(220px,50vw,280px)}
+    .cloud{height:clamp(280px,65vw,380px)}
     .cw.xl{font-size:20px}.cw.lg{font-size:16px}
     .wb{padding:24px 20px}
     .timeline{padding-left:36px}
     .tl-dot{left:-31px;width:14px;height:14px}
-    .intro-logo-main{width:min(92vw,500px)}
+    .intro-logo-main{width:min(94vw,560px);margin-bottom:-16px}
   }
 </style>
 </head>
@@ -540,12 +539,19 @@
   });
   lb.addEventListener('click',()=>lb.classList.remove('on'));
 
-  /* ── WORD CLOUD — stagger float animations + alternate colours ── */
-  document.querySelectorAll('.cw').forEach((w,i)=>{
+  /* ── WORD CLOUD — stagger float animations + random colour cycling ── */
+  const allCW=document.querySelectorAll('.cw');
+  allCW.forEach((w,i)=>{
     w.style.setProperty('--float-dur',(3+Math.random()*2).toFixed(1)+'s');
     w.style.setProperty('--float-del',(Math.random()*3).toFixed(1)+'s');
-    w.classList.add(i%2===0?'c-blue':'c-green');
+    w.classList.add(Math.random()>0.5?'c-blue':'c-green');
   });
+  setInterval(()=>{
+    const idx=Math.floor(Math.random()*allCW.length);
+    const w=allCW[idx];
+    if(w.classList.contains('on'))return;
+    w.classList.toggle('c-blue');w.classList.toggle('c-green');
+  },800);
 
   /* ── WORD CLOUD ── */
   document.addEventListener('click',e=>{

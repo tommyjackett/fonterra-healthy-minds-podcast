@@ -547,20 +547,8 @@
           document.body.style.overflow='';
           window.scrollTo(0,0);
           countStats();
-          /* Pulse keeps → getting → stronger, twice */
-          const hw=['hw-keeps','hw-getting','hw-stronger'];
-          function pulseWord(id){
-            const el=document.getElementById(id);
-            if(!el)return;
-            el.classList.remove('pulse');
-            void el.offsetWidth;
-            el.classList.add('pulse');
-          }
-          function pulseSequence(startDelay){
-            hw.forEach((id,i)=>setTimeout(()=>pulseWord(id),startDelay+i*750));
-          }
-          pulseSequence(2500);
-          pulseSequence(5900);
+          /* First pulse after stats tick */
+          setTimeout(()=>pulseSequence(),2500);
         },600);
       },350);
     } else {
@@ -583,6 +571,27 @@
         if(p<1)requestAnimationFrame(tick);
       })(t0);
     });
+  }
+
+  /* ── HERO WORD PULSE ── */
+  const hwIds=['hw-keeps','hw-getting','hw-stronger'];
+  function pulseWord(id){
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.classList.remove('pulse');
+    void el.offsetWidth;
+    el.classList.add('pulse');
+  }
+  function pulseSequence(){
+    hwIds.forEach((id,i)=>setTimeout(()=>pulseWord(id),i*750));
+  }
+  /* Replay when hero scrolls back into view */
+  const heroEl=document.querySelector('.hero');
+  if(heroEl){
+    const heroObs=new IntersectionObserver(es=>{es.forEach(e=>{
+      if(e.isIntersecting)pulseSequence();
+    })},{threshold:0.6});
+    heroObs.observe(heroEl);
   }
 
   /* ── FADE-IN ── */

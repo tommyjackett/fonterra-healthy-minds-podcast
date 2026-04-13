@@ -60,7 +60,9 @@
     letter-spacing:-0.03em;margin-bottom:20px;max-width:600px;text-align:center;
     color:var(--blue);
   }
-  .hero-title em{font-style:normal;font-weight:600;color:var(--green)}
+  .hero-title em{font-style:normal;font-weight:600;color:var(--green);display:inline-block}
+  .hero-title em.pulse{animation:hero-pulse 1.2s ease-in-out 3}
+  @keyframes hero-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:0.85}}
   .hero-sub{font-size:clamp(15px,2vw,18px);max-width:520px;color:var(--ink-soft);line-height:1.65;margin-bottom:0;font-weight:300;text-align:center}
 
   /* ═══════════ JOURNEY ═══════════ */
@@ -544,6 +546,8 @@
           document.body.style.overflow='';
           window.scrollTo(0,0);
           countStats();
+          /* Pulse "keeps getting stronger" after stats finish ticking */
+          setTimeout(()=>{const em=document.querySelector('.hero-title em');if(em)em.classList.add('pulse')},2500);
         },600);
       },350);
     } else {

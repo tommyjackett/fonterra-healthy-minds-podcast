@@ -43,24 +43,24 @@
   /* ═══════════ HERO ═══════════ */
   .hero{
     position:relative;overflow:hidden;
-    padding:60px 24px 48px;
+    padding:48px 24px 40px;
   }
   .hero-bg{position:absolute;inset:0;background:var(--cream-warm)}
   .hero-bg::after{display:none}
   .hero-inner{max-width:720px;margin:0 auto;width:100%;position:relative;z-index:2;
     display:flex;flex-direction:column;align-items:center;text-align:center}
-  .hero-artwork{width:min(160px,40vw);height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:20px;margin-bottom:32px;box-shadow:0 12px 40px rgba(28,44,83,0.2),0 4px 12px rgba(28,44,83,0.1)}
+  .hero-artwork{width:min(220px,55vw);height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:20px;margin-bottom:24px;box-shadow:0 12px 40px rgba(28,44,83,0.2),0 4px 12px rgba(28,44,83,0.1)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:480px;width:100%;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line);text-align:center}
+  .stat-num{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,5vw,44px);font-weight:300;line-height:1;color:var(--blue);margin-bottom:3px}
+  .stat-label{font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-soft);opacity:0.6}
   .hero-title{
     font-family:'Fraunces',Georgia,serif;
     font-size:clamp(28px,6vw,52px);font-weight:400;line-height:1.1;
     letter-spacing:-0.03em;margin-bottom:20px;max-width:600px;text-align:center;
     color:var(--blue);
   }
-  .hero-title em{font-style:italic;font-weight:300;color:var(--green)}
-  .hero-sub{font-size:clamp(14px,1.6vw,17px);max-width:520px;color:var(--ink-soft);line-height:1.65;margin-bottom:32px;font-weight:300;text-align:center}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:480px;width:100%;padding-top:24px;border-top:1px solid var(--line);text-align:center}
-  .stat-num{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,5vw,44px);font-weight:300;line-height:1;color:var(--blue);margin-bottom:3px}
-  .stat-label{font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-soft);opacity:0.6}
+  .hero-title em{font-style:normal;font-weight:600;color:var(--green)}
+  .hero-sub{font-size:clamp(15px,2vw,18px);max-width:520px;color:var(--ink-soft);line-height:1.65;margin-bottom:0;font-weight:300;text-align:center}
 
   /* ═══════════ JOURNEY ═══════════ */
   .journey{background:var(--white);padding:72px 24px 80px;border-bottom:1px solid var(--line)}
@@ -259,14 +259,14 @@
   <div class="hero-bg"></div>
   <div class="hero-inner">
     <img class="hero-artwork" src="assets/artwork.png" alt="Healthy Minds Podcast">
-    <h1 class="hero-title">Four seasons.<br>One conversation that keeps<br><em>getting stronger.</em></h1>
-    <p class="hero-sub">A look back at how Fonterra's mental health podcast has evolved — from breaking the silence to rebuilding identity to leadership as daily practice. Twenty-four conversations. One continuing story.</p>
     <div class="stats">
       <div><div class="stat-num" data-count="24">0</div><div class="stat-label">Episodes</div></div>
       <div><div class="stat-num" data-count="4">0</div><div class="stat-label">Seasons</div></div>
       <div><div class="stat-num" data-count="2022" data-static>2022</div><div class="stat-label">Launched</div></div>
       <div><div class="stat-num" data-count="860">0</div><div class="stat-label">Minutes</div></div>
     </div>
+    <h1 class="hero-title">Four seasons.<br>One conversation that keeps<br><em>getting stronger.</em></h1>
+    <p class="hero-sub">A look back at how Fonterra's mental health podcast has evolved — from breaking the silence to rebuilding identity to leadership as daily practice. Twenty-four conversations. One continuing story.</p>
   </div>
 </header>
 

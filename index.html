@@ -522,7 +522,7 @@
   function tryUnlock(){
     if(pwInput.value.trim().toLowerCase()===PASS){
       pwGate.classList.add('unlocked');
-      setTimeout(()=>{pwGate.style.display='none';document.body.style.overflow='';countStats()},600);
+      setTimeout(()=>{pwGate.style.display='none';document.body.style.overflow='';window.scrollTo(0,0);countStats()},600);
     } else {
       pwInput.classList.add('wrong');
       pwError.classList.add('show');

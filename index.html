@@ -171,15 +171,15 @@
     background:url('assets/bg-texture.png') center/cover no-repeat;
     border-radius:16px;
     padding:24px;overflow:hidden;
-    box-shadow:0 4px 24px rgba(28,44,83,0.08);
-    border:1px solid var(--line);
+    box-shadow:0 6px 28px rgba(28,44,83,0.12);
+    border:1.5px solid rgba(28,44,83,0.12);
   }
   .cw{
     position:absolute;font-weight:700;color:var(--blue);cursor:pointer;
     padding:5px 12px;border-radius:100px;border:1.5px solid transparent;
     transition:background 0.3s,color 0.8s,border-color 0.3s;line-height:1.2;user-select:none;-webkit-user-select:none;
     white-space:nowrap;transform:translate(-50%,-50%);
-    text-shadow:0 1px 3px rgba(255,255,255,0.9);
+    text-shadow:0 1px 4px rgba(255,255,255,0.95),0 0 8px rgba(255,255,255,0.6);
     animation:cw-float var(--float-dur,4s) ease-in-out var(--float-del,0s) infinite;
   }
   @keyframes cw-float{0%,100%{transform:translate(-50%,-50%) scale(1) translateY(0)}50%{transform:translate(-50%,-50%) scale(1.06) translateY(-3px)}}

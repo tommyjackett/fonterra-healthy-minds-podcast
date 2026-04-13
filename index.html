@@ -167,7 +167,7 @@
   .cl-label{font-size:clamp(15px,2.5vw,18px);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);opacity:0.7;margin-bottom:6px;text-align:center}
   .cl-hint{font-size:clamp(14px,2.2vw,16px);color:var(--ink-soft);margin-bottom:20px;text-align:center}
   .cloud{
-    position:relative;width:100%;max-width:640px;height:clamp(300px,60vw,420px);
+    position:relative;width:100%;height:clamp(340px,65vw,460px);
     background:url('assets/bg-texture.png') center/cover no-repeat;
     border-radius:16px;
     padding:24px;overflow:hidden;
@@ -179,16 +179,16 @@
     padding:5px 12px;border-radius:100px;border:1.5px solid transparent;
     transition:background 0.3s,color 0.8s,border-color 0.3s;line-height:1.2;user-select:none;-webkit-user-select:none;
     white-space:nowrap;transform:translate(-50%,-50%);
-    text-shadow:0 1px 4px rgba(255,255,255,0.95),0 0 8px rgba(255,255,255,0.6);
+    text-shadow:0 1px 4px rgba(0,0,0,0.35),0 0 8px rgba(0,0,0,0.15);
     animation:cw-float var(--float-dur,4s) ease-in-out var(--float-del,0s) infinite;
   }
   @keyframes cw-float{0%,100%{transform:translate(-50%,-50%) scale(1) translateY(0)}50%{transform:translate(-50%,-50%) scale(1.06) translateY(-3px)}}
   .cw:hover{border-color:var(--green);background:var(--green-pale)}
   .cw.on{background:var(--green);color:var(--white);border-color:var(--green)}
-  .cw.xl{font-size:clamp(22px,4vw,30px)}
-  .cw.lg{font-size:clamp(17px,3vw,22px)}
-  .cw.md{font-size:clamp(14px,2.5vw,17px)}
-  .cw.sm{font-size:clamp(11px,2vw,13px);font-weight:600}
+  .cw.xl{font-size:clamp(28px,5vw,38px)}
+  .cw.lg{font-size:clamp(21px,3.8vw,28px)}
+  .cw.md{font-size:clamp(17px,3vw,22px)}
+  .cw.sm{font-size:clamp(14px,2.5vw,17px);font-weight:600}
   .cw.c-green{color:var(--green) !important}
   .cw.c-blue{color:var(--blue) !important}
 
@@ -246,8 +246,8 @@
     .hero{padding:40px 16px 32px;min-height:92vh}
     .season-section{padding:56px 20px 68px}
     .car-item{flex:0 0 180px}
-    .cloud{height:clamp(300px,70vw,400px)}
-    .cw.xl{font-size:20px}.cw.lg{font-size:16px}
+    .cloud{height:clamp(340px,75vw,440px)}
+    .cw.xl{font-size:26px}.cw.lg{font-size:20px}.cw.md{font-size:16px}.cw.sm{font-size:14px}
     .wb{padding:24px 20px}
     .timeline{padding-left:36px}
     .tl-dot{left:-31px;width:14px;height:14px}

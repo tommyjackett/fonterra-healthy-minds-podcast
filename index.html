@@ -167,17 +167,19 @@
   .cl-label{font-size:clamp(15px,2.5vw,18px);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);opacity:0.7;margin-bottom:6px;text-align:center}
   .cl-hint{font-size:clamp(14px,2.2vw,16px);color:var(--ink-soft);margin-bottom:20px;text-align:center}
   .cloud{
-    position:relative;width:100%;max-width:600px;height:clamp(300px,60vw,420px);
+    position:relative;width:100%;max-width:640px;height:clamp(300px,60vw,420px);
     background:url('assets/bg-texture.png') center/cover no-repeat;
-    border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
-    padding:20px;overflow:hidden;
-    box-shadow:0 4px 24px rgba(28,44,83,0.06);
+    border-radius:16px;
+    padding:24px;overflow:hidden;
+    box-shadow:0 4px 24px rgba(28,44,83,0.08);
+    border:1px solid var(--line);
   }
   .cw{
     position:absolute;font-weight:700;color:var(--blue);cursor:pointer;
     padding:5px 12px;border-radius:100px;border:1.5px solid transparent;
     transition:background 0.3s,color 0.8s,border-color 0.3s;line-height:1.2;user-select:none;-webkit-user-select:none;
     white-space:nowrap;transform:translate(-50%,-50%);
+    text-shadow:0 1px 3px rgba(255,255,255,0.9);
     animation:cw-float var(--float-dur,4s) ease-in-out var(--float-del,0s) infinite;
   }
   @keyframes cw-float{0%,100%{transform:translate(-50%,-50%) scale(1) translateY(0)}50%{transform:translate(-50%,-50%) scale(1.06) translateY(-3px)}}
@@ -244,7 +246,7 @@
     .hero{padding:40px 16px 32px;min-height:92vh}
     .season-section{padding:56px 20px 68px}
     .car-item{flex:0 0 180px}
-    .cloud{height:clamp(280px,65vw,380px)}
+    .cloud{height:clamp(300px,70vw,400px)}
     .cw.xl{font-size:20px}.cw.lg{font-size:16px}
     .wb{padding:24px 20px}
     .timeline{padding-left:36px}

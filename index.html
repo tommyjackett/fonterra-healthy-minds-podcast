@@ -481,8 +481,11 @@
 
   /* ── INTRO ── */
   const intro=document.getElementById('intro');
+  /* Lock scroll during intro */
+  window.scrollTo(0,0);
+  document.body.style.overflow='hidden';
   setTimeout(()=>intro.classList.add('leaving'),3000);
-  setTimeout(()=>{intro.style.display='none'},4000);
+  setTimeout(()=>{intro.style.display='none';document.body.style.overflow=''},4000);
 
   /* ── COUNT STATS after intro fades ── */
   function countStats(){
@@ -505,7 +508,17 @@
   /* ── BACK TO TOP ── */
   const btt=document.getElementById('btt');
   window.addEventListener('scroll',()=>{btt.classList.toggle('show',window.scrollY>600)},{passive:true});
-  btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  const sections=[document.querySelector('.hero'),document.getElementById('journey'),
+    document.getElementById('s1'),document.getElementById('s2'),
+    document.getElementById('s3'),document.getElementById('s4')].filter(Boolean);
+  btt.addEventListener('click',()=>{
+    const scrollY=window.scrollY;
+    for(let i=sections.length-1;i>=0;i--){
+      const top=sections[i].offsetTop;
+      if(top<scrollY-20){sections[i].scrollIntoView({behavior:'smooth',block:'start'});return}
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
 
   /* ── JOURNEY TIMELINE — line fills once on scroll, dots pulse continuously ── */
   const tlFill=document.getElementById('tlFill');

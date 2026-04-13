@@ -318,7 +318,7 @@
 <section class="journey" id="journey">
   <div class="container">
     <h2 class="j-eyebrow fi">The Journey</h2>
-    <p class="j-sub fi">Each season took the conversation somewhere new. Together they tell the story of what happens when a workplace keeps showing up.</p>
+    <p class="j-sub fi">Each season took the conversation somewhere new. Together they tell the story of what happens when a workplace keeps showing up for their people.</p>
     <div class="timeline fi" id="timeline">
       <div class="tl-fill" id="tlFill"></div>
       <div class="tl-row">
@@ -523,8 +523,12 @@
     if(pwInput.value.trim().toLowerCase()===PASS){
       pwInput.blur();
       window.scrollTo(0,0);
-      pwGate.classList.add('unlocked');
-      setTimeout(()=>{pwGate.style.display='none';document.body.style.overflow='';countStats()},600);
+      /* Wait for mobile keyboard to fully dismiss before fading */
+      setTimeout(()=>{
+        window.scrollTo(0,0);
+        pwGate.classList.add('unlocked');
+        setTimeout(()=>{pwGate.style.display='none';document.body.style.overflow='';countStats()},600);
+      },350);
     } else {
       pwInput.classList.add('wrong');
       pwError.classList.add('show');

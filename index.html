@@ -175,7 +175,7 @@
   .cw{
     position:absolute;font-weight:700;color:var(--blue);cursor:pointer;
     padding:5px 12px;border-radius:100px;border:1.5px solid transparent;
-    transition:background 0.3s,color 0.8s,border-color 0.3s;line-height:1.2;user-select:none;-webkit-user-select:none;
+    transition:background 0.3s,color 0.8s,border-color 0.3s,text-shadow 0.8s;line-height:1.2;user-select:none;-webkit-user-select:none;
     white-space:nowrap;transform:translate(-50%,-50%);
     text-shadow:0 1px 4px rgba(0,0,0,0.35),0 0 8px rgba(0,0,0,0.15);
     animation:cw-float var(--float-dur,4s) ease-in-out var(--float-del,0s) infinite;
@@ -187,8 +187,8 @@
   .cw.lg{font-size:clamp(21px,3.8vw,28px)}
   .cw.md{font-size:clamp(17px,3vw,22px)}
   .cw.sm{font-size:clamp(14px,2.5vw,17px);font-weight:600}
-  .cw.c-green{color:#4a9e1e !important;text-shadow:0 1px 3px rgba(0,0,0,0.4),0 0 6px rgba(0,0,0,0.15) !important}
-  .cw.c-blue{color:var(--blue) !important}
+  .cw.c-green{color:#4a9e1e !important;text-shadow:0 1px 3px rgba(0,0,0,0.4),0 0 6px rgba(0,0,0,0.15)}
+  .cw.c-blue{color:var(--blue) !important;text-shadow:0 1px 4px rgba(0,0,0,0.35),0 0 8px rgba(0,0,0,0.15)}
 
   .cr{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.4s,opacity 0.3s;opacity:0;width:100%;position:relative;z-index:10}
   .cr.on{grid-template-rows:1fr;opacity:1;margin-top:12px}

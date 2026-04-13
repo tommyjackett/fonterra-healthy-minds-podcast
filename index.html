@@ -135,6 +135,11 @@
     transition:transform 0.3s,box-shadow 0.3s;background:var(--white);
   }
   .car-item:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(28,44,83,0.12)}
+  .car-arrows{display:flex;justify-content:center;gap:12px;margin-top:14px}
+  .car-arrow{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--white);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;
+    font-size:16px;color:var(--blue);box-shadow:0 2px 8px rgba(28,44,83,0.06)}
+  .car-arrow:hover{background:var(--blue);color:var(--white);border-color:var(--blue)}
   .car-item img{width:100%;height:auto;display:block}
   .car-item .c-name{padding:9px 12px;font-size:11px;font-weight:700;color:var(--blue);text-align:center}
 
@@ -318,7 +323,7 @@
       <div class="car-item" data-full="assets/quotes/s1-jeff.png"><img src="assets/quotes/s1-jeff.png" alt="Jeff Dew" loading="lazy"><div class="c-name">Jeff Dew</div></div>
       <div class="car-item" data-full="assets/quotes/s1-rob.png"><img src="assets/quotes/s1-rob.png" alt="Rob Howell" loading="lazy"><div class="c-name">Rob Howell</div></div>
       <div class="car-item" data-full="assets/quotes/s1-sarah.png"><img src="assets/quotes/s1-sarah.png" alt="Sarah Counsell" loading="lazy"><div class="c-name">Sarah Counsell</div></div>
-    </div></div></div>
+    </div></div><div class="car-arrows"><button class="car-arrow car-prev" aria-label="Previous">&#8592;</button><button class="car-arrow car-next" aria-label="Next">&#8594;</button></div></div>
     <div class="cloud-section fi">
       <div class="cl-label">Where the raw, lived experiences came through</div>
       <div class="cl-hint">Tap a word to hear its story</div>
@@ -354,7 +359,7 @@
       <div class="car-item" data-full="assets/quotes/s2-mark.png"><img src="assets/quotes/s2-mark.png" alt="Mark Sanderlands" loading="lazy"><div class="c-name">Mark Sanderlands</div></div>
       <div class="car-item" data-full="assets/quotes/s2-pat.png"><img src="assets/quotes/s2-pat.png" alt="Pat Russell" loading="lazy"><div class="c-name">Pat Russell</div></div>
       <div class="car-item" data-full="assets/quotes/s2-peter.png"><img src="assets/quotes/s2-peter.png" alt="Pete Pezzamenti" loading="lazy"><div class="c-name">Pete Pezzamenti</div></div>
-    </div></div></div>
+    </div></div><div class="car-arrows"><button class="car-arrow car-prev" aria-label="Previous">&#8592;</button><button class="car-arrow car-next" aria-label="Next">&#8594;</button></div></div>
     <div class="cloud-section fi">
       <div class="cl-label">Where the raw, lived experiences came through</div>
       <div class="cl-hint">Tap a word to hear its story</div>
@@ -389,7 +394,7 @@
       <div class="car-item" data-full="assets/quotes/s3-vicki.png"><img src="assets/quotes/s3-vicki.png" alt="Dr Vicki Inglis" loading="lazy"><div class="c-name">Dr Vicki Inglis</div></div>
       <div class="car-item" data-full="assets/quotes/s3-steve.png"><img src="assets/quotes/s3-steve.png" alt="Steve Harland" loading="lazy"><div class="c-name">Steve Harland</div></div>
       <div class="car-item" data-full="assets/quotes/s3-cate.png"><img src="assets/quotes/s3-cate.png" alt="Cate Page" loading="lazy"><div class="c-name">Cate Page</div></div>
-    </div></div></div>
+    </div></div><div class="car-arrows"><button class="car-arrow car-prev" aria-label="Previous">&#8592;</button><button class="car-arrow car-next" aria-label="Next">&#8594;</button></div></div>
     <div class="cloud-section fi">
       <div class="cl-label">Where the raw, lived experiences came through</div>
       <div class="cl-hint">Tap a word to hear its story</div>
@@ -425,7 +430,7 @@
       <div class="car-item" data-full="assets/quotes/s4-brent.png"><img src="assets/quotes/s4-brent.png" alt="Brent Fiecken" loading="lazy"><div class="c-name">Brent Fiecken</div></div>
       <div class="car-item" data-full="assets/quotes/s4-jorja.png"><img src="assets/quotes/s4-jorja.png" alt="Jorja Cleeland" loading="lazy"><div class="c-name">Jorja Cleeland</div></div>
       <div class="car-item" data-full="assets/quotes/s4-david.png"><img src="assets/quotes/s4-david.png" alt="David Breckenridge" loading="lazy"><div class="c-name">David Breckenridge</div></div>
-    </div></div></div>
+    </div></div><div class="car-arrows"><button class="car-arrow car-prev" aria-label="Previous">&#8592;</button><button class="car-arrow car-next" aria-label="Next">&#8594;</button></div></div>
     <div class="cloud-section fi">
       <div class="cl-label">Where the raw, lived experiences came through</div>
       <div class="cl-hint">Tap a word to hear its story</div>
@@ -522,7 +527,7 @@
   document.querySelectorAll('.car-track').forEach(track=>{
     const items=Array.from(track.children);
     const count=parseInt(track.dataset.items)||items.length;
-    // Clone items for seamless loop
+    const itemW=items[0].offsetWidth+14; // width + gap
     items.forEach(item=>{const c=item.cloneNode(true);track.appendChild(c)});
     let pos=0;const speed=0.5;let paused=false;
     function step(){
@@ -539,6 +544,12 @@
     track.addEventListener('mouseleave',()=>paused=false);
     track.addEventListener('touchstart',()=>paused=true,{passive:true});
     track.addEventListener('touchend',()=>{setTimeout(()=>paused=false,2000)});
+    // Arrow buttons
+    const section=track.closest('.carousel-section');
+    const prevBtn=section.querySelector('.car-prev');
+    const nextBtn=section.querySelector('.car-next');
+    if(prevBtn)prevBtn.addEventListener('click',()=>{pos+=itemW;const hw=track.scrollWidth/2;if(pos>0)pos=-hw+pos;track.style.transform='translateX('+pos+'px)'});
+    if(nextBtn)nextBtn.addEventListener('click',()=>{pos-=itemW;const hw=track.scrollWidth/2;if(Math.abs(pos)>=hw)pos=0;track.style.transform='translateX('+pos+'px)'});
   });
 
   /* ── LIGHTBOX ── */

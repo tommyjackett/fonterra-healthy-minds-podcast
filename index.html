@@ -62,7 +62,7 @@
   }
   .hero-title em{font-style:normal;font-weight:600;color:var(--green)}
   .hw{display:inline-block}
-  .hw.pulse{animation:hw-pulse 0.6s ease-in-out 1}
+  .hw.pulse{animation:hw-pulse 0.9s ease-in-out 1}
   @keyframes hw-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:0.8}}
   .hero-sub{font-size:clamp(15px,2vw,18px);max-width:520px;color:var(--ink-soft);line-height:1.65;margin-bottom:0;font-weight:300;text-align:center}
 
@@ -557,10 +557,10 @@
             el.classList.add('pulse');
           }
           function pulseSequence(startDelay){
-            hw.forEach((id,i)=>setTimeout(()=>pulseWord(id),startDelay+i*500));
+            hw.forEach((id,i)=>setTimeout(()=>pulseWord(id),startDelay+i*750));
           }
           pulseSequence(2500);
-          pulseSequence(4500);
+          pulseSequence(5500);
         },600);
       },350);
     } else {

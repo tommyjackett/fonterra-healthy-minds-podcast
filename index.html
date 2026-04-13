@@ -519,15 +519,32 @@
   const pwError=document.getElementById('pw-error');
   const PASS='healthy minds';
 
+  /* Lock page in place on iOS Safari (overflow:hidden doesn't work) */
+  document.body.style.position='fixed';
+  document.body.style.top='0';
+  document.body.style.left='0';
+  document.body.style.right='0';
+  document.body.style.width='100%';
+  document.body.style.overflow='hidden';
+
   function tryUnlock(){
     if(pwInput.value.trim().toLowerCase()===PASS){
       pwInput.blur();
-      window.scrollTo(0,0);
       /* Wait for mobile keyboard to fully dismiss before fading */
       setTimeout(()=>{
-        window.scrollTo(0,0);
         pwGate.classList.add('unlocked');
-        setTimeout(()=>{pwGate.style.display='none';document.body.style.overflow='';countStats()},600);
+        setTimeout(()=>{
+          pwGate.style.display='none';
+          /* Unlock page */
+          document.body.style.position='';
+          document.body.style.top='';
+          document.body.style.left='';
+          document.body.style.right='';
+          document.body.style.width='';
+          document.body.style.overflow='';
+          window.scrollTo(0,0);
+          countStats();
+        },600);
       },350);
     } else {
       pwInput.classList.add('wrong');
@@ -537,10 +554,6 @@
   }
   pwBtn.addEventListener('click',tryUnlock);
   pwInput.addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock()});
-
-  /* Lock scroll until password entered */
-  window.scrollTo(0,0);
-  document.body.style.overflow='hidden';
 
   /* ── COUNT STATS ── */
   function countStats(){

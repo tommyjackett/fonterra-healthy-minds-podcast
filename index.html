@@ -60,9 +60,10 @@
     letter-spacing:-0.03em;margin-bottom:20px;max-width:600px;text-align:center;
     color:var(--blue);
   }
-  .hero-title em{font-style:normal;font-weight:600;color:var(--green);display:inline-block}
-  .hero-title em.pulse{animation:hero-pulse 1.2s ease-in-out 3}
-  @keyframes hero-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:0.85}}
+  .hero-title em{font-style:normal;font-weight:600;color:var(--green)}
+  .hw{display:inline-block}
+  .hw.pulse{animation:hw-pulse 0.6s ease-in-out 1}
+  @keyframes hw-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:0.8}}
   .hero-sub{font-size:clamp(15px,2vw,18px);max-width:520px;color:var(--ink-soft);line-height:1.65;margin-bottom:0;font-weight:300;text-align:center}
 
   /* ═══════════ JOURNEY ═══════════ */
@@ -308,7 +309,7 @@
       <div><div class="stat-num" data-count="2022" data-static>2022</div><div class="stat-label">Launched</div></div>
       <div><div class="stat-num" data-count="860">0</div><div class="stat-label">Minutes</div></div>
     </div>
-    <h1 class="hero-title">Four seasons.<br>One conversation that<br><em>keeps getting stronger.</em></h1>
+    <h1 class="hero-title">Four seasons.<br>One conversation that<br><em><span class="hw" id="hw-keeps">keeps</span> <span class="hw" id="hw-getting">getting</span> <span class="hw" id="hw-stronger">stronger.</span></em></h1>
     <p class="hero-sub">A look back at how Fonterra's mental health podcast has grown, from breaking the silence to rebuilding identity to leadership as a daily practice. Twenty-four conversations. One continuing story.</p>
   </div>
 </header>
@@ -546,8 +547,20 @@
           document.body.style.overflow='';
           window.scrollTo(0,0);
           countStats();
-          /* Pulse "keeps getting stronger" after stats finish ticking */
-          setTimeout(()=>{const em=document.querySelector('.hero-title em');if(em)em.classList.add('pulse')},2500);
+          /* Pulse keeps → getting → stronger, twice */
+          const hw=['hw-keeps','hw-getting','hw-stronger'];
+          function pulseWord(id){
+            const el=document.getElementById(id);
+            if(!el)return;
+            el.classList.remove('pulse');
+            void el.offsetWidth;
+            el.classList.add('pulse');
+          }
+          function pulseSequence(startDelay){
+            hw.forEach((id,i)=>setTimeout(()=>pulseWord(id),startDelay+i*500));
+          }
+          pulseSequence(2500);
+          pulseSequence(4500);
         },600);
       },350);
     } else {

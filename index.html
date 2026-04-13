@@ -61,14 +61,13 @@
   }
   .hero-title em{font-style:italic;font-weight:300;color:var(--green-soft)}
   .hero-highlight{
-    position:relative;display:inline;padding:2px 8px;
-    background:linear-gradient(to right,#FFFFFF,#FFFFFF);
-    background-size:0% 100%;background-repeat:no-repeat;background-position:left;
-    animation:highlight-fill 1.5s ease 1.2s forwards;
-    border-radius:4px;
+    position:relative;display:inline;padding:4px 10px 6px;
+    background:#FFFFFF;border-radius:6px;
+    -webkit-clip-path:inset(0 100% 0 0);clip-path:inset(0 100% 0 0);
+    animation:highlight-reveal 1.5s ease 1s forwards;
   }
-  .hero-highlight em{color:var(--green)}
-  @keyframes highlight-fill{to{background-size:100% 100%}}
+  .hero-highlight em{color:var(--green);font-weight:400}
+  @keyframes highlight-reveal{to{-webkit-clip-path:inset(0 0 0 0);clip-path:inset(0 0 0 0)}}
   .hero-sub{font-size:clamp(14px,1.4vw,16px);max-width:480px;opacity:0.6;line-height:1.65;margin-bottom:36px;font-weight:300;text-align:center}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:480px;width:100%;padding-top:24px;border-top:1px solid rgba(251,248,243,0.15);text-align:center}
   .stat-num{font-family:'Fraunces',Georgia,serif;font-size:clamp(30px,5vw,48px);font-weight:300;line-height:1;color:var(--cream);margin-bottom:3px}
@@ -83,13 +82,13 @@
 
   .timeline{position:relative;padding-left:44px}
   .timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--line);border-radius:2px}
-  .tl-fill{position:absolute;left:13px;top:8px;width:2px;height:0;background:linear-gradient(to bottom,var(--green),var(--blue));border-radius:2px;transition:height 0.15s ease;
-    box-shadow:0 0 6px rgba(114,191,68,0.3)}
+  .tl-fill{position:absolute;left:13px;top:8px;width:2px;height:0;background:linear-gradient(to bottom,var(--green),var(--blue));border-radius:2px;
+    box-shadow:0 0 6px rgba(114,191,68,0.3);
+    animation:tl-trail 6s ease-in-out infinite}
   .tl-fill::after{content:'';position:absolute;bottom:0;left:-3px;width:8px;height:8px;
     border-radius:50%;background:var(--green);
-    box-shadow:0 0 10px rgba(114,191,68,0.5);
-    animation:tl-pulse 1.5s ease-in-out infinite}
-  @keyframes tl-pulse{0%,100%{opacity:0.6;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+    box-shadow:0 0 10px rgba(114,191,68,0.5)}
+  @keyframes tl-trail{0%{height:0}80%{height:100%}100%{height:100%}}
 
   .tl-stop{position:relative;padding-bottom:32px;opacity:0.4;transform:translateX(-8px);transition:all 0.5s ease}
   .tl-stop:last-child{padding-bottom:0}
@@ -184,8 +183,8 @@
   .cw.lg{font-size:clamp(17px,3vw,22px)}
   .cw.md{font-size:clamp(14px,2.5vw,17px)}
   .cw.sm{font-size:clamp(11px,2vw,13px);font-weight:600}
-  .cw.c-green{color:var(--green)}
-  .cw.c-blue{color:var(--blue)}
+  .cw.c-green{color:var(--green) !important}
+  .cw.c-blue{color:var(--blue) !important}
 
   .cr{max-height:0;overflow:hidden;transition:max-height 0.4s,opacity 0.3s;opacity:0;max-width:600px}
   .cr.on{max-height:200px;opacity:1;margin-top:12px}
@@ -297,7 +296,7 @@
 </section>
 
 <!-- ═══ S1 ═══ -->
-<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
+<div class="season-divider"></div>
 <section class="season-section" id="s1">
   <div class="season-container">
     <div class="season-header fi"><div class="sh-label">Season 1 · 2022</div><h2 class="sh-title">Break the Silence</h2><div class="sh-meta">7 guests · The first brave step</div></div>
@@ -335,7 +334,7 @@
 </section>
 
 <!-- ═══ S2 ═══ -->
-<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
+<div class="season-divider"></div>
 <section class="season-section" id="s2">
   <div class="season-container">
     <div class="season-header fi"><div class="sh-label">Season 2 · 2023</div><h2 class="sh-title">Identity &amp; Rebuilding</h2><div class="sh-meta">5 guests · From disclosure to reconstruction</div></div>
@@ -369,7 +368,7 @@
 </section>
 
 <!-- ═══ S3 ═══ -->
-<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
+<div class="season-divider"></div>
 <section class="season-section" id="s3">
   <div class="season-container">
     <div class="season-header fi"><div class="sh-label">Season 3 · 2024</div><h2 class="sh-title">Tools &amp; Prevention</h2><div class="sh-meta">6 guests · From story to practice</div></div>
@@ -405,7 +404,7 @@
 </section>
 
 <!-- ═══ S4 ═══ -->
-<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
+<div class="season-divider"></div>
 <section class="season-section" id="s4">
   <div class="season-container">
     <div class="season-header fi"><div class="sh-label">Season 4 · 2025</div><h2 class="sh-title">Leadership as Practice</h2><div class="sh-meta">6 guests · The mirror turns to leaders</div></div>
@@ -495,25 +494,14 @@
   window.addEventListener('scroll',()=>{btt.classList.toggle('show',window.scrollY>600)},{passive:true});
   btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-  /* ── JOURNEY TIMELINE — one-direction only, never reverses ── */
+  /* ── JOURNEY TIMELINE — auto-activate stops on loop ── */
   const tlStops=document.querySelectorAll('.tl-stop');
-  const tlFill=document.getElementById('tlFill');
-  const timeline=document.getElementById('timeline');
-  let tlMax=0;
-  window.addEventListener('scroll',()=>{
-    if(!timeline)return;
-    const rect=timeline.getBoundingClientRect();
-    const h=timeline.offsetHeight;
-    const trigger=window.innerHeight*0.6;
-    const scrolled=trigger-rect.top;
-    const pct=Math.max(0,Math.min(1,scrolled/h));
-    if(pct>tlMax)tlMax=pct;
-    tlFill.style.height=(tlMax*100)+'%';
-    tlStops.forEach(s=>{
-      const sr=s.getBoundingClientRect();
-      if(sr.top<trigger) s.classList.add('active');
-    });
-  },{passive:true});
+  let stopIdx=0;
+  function activateNextStop(){
+    if(stopIdx<tlStops.length){tlStops[stopIdx].classList.add('active');stopIdx++}
+    else{tlStops.forEach(s=>s.classList.remove('active'));stopIdx=0}
+  }
+  setInterval(activateNextStop,1500);
 
   /* ── CAROUSEL (JS requestAnimationFrame) ── */
   document.querySelectorAll('.car-track').forEach(track=>{
@@ -554,11 +542,13 @@
     w.classList.add(Math.random()>0.5?'c-blue':'c-green');
   });
   setInterval(()=>{
-    const idx=Math.floor(Math.random()*allCW.length);
-    const w=allCW[idx];
-    if(w.classList.contains('on'))return;
-    w.classList.toggle('c-blue');w.classList.toggle('c-green');
-  },800);
+    for(let i=0;i<3;i++){
+      const idx=Math.floor(Math.random()*allCW.length);
+      const w=allCW[idx];
+      if(w.classList.contains('on'))continue;
+      w.classList.toggle('c-blue');w.classList.toggle('c-green');
+    }
+  },600);
 
   /* ── WORD CLOUD ── */
   document.addEventListener('click',e=>{

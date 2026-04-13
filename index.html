@@ -6,19 +6,13 @@
 <title>Healthy Minds — Four Seasons, One Conversation</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #1C2C53;
-    --blue-deep: #141F3A;
-    --blue-mid: #243764;
-    --green: #72BF44;
-    --green-soft: #8ED064;
-    --green-pale: rgba(114,191,68,0.08);
-    --cream: #FBF8F3;
-    --cream-warm: #F0EBE0;
-    --white: #FFFFFF;
-    --ink: #1A1A1A;
-    --ink-soft: #5A5A5A;
-    --line: rgba(28,44,83,0.1);
+  :root{
+    --blue:#1C2C53;--blue-deep:#141F3A;--blue-mid:#243764;
+    --green:#72BF44;--green-soft:#8ED064;--green-pale:rgba(114,191,68,0.08);
+    --cream:#FBF8F3;--cream-warm:#F0EBE0;--white:#FFFFFF;
+    --ink:#1A1A1A;--ink-soft:#5A5A5A;--line:rgba(28,44,83,0.1);
+    /* season tints */
+    --s1-bg:#FBF8F3;--s2-bg:#F6F4F0;--s3-bg:#F0F3F6;--s4-bg:#EBF0F5;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -28,39 +22,22 @@
   .intro{
     position:fixed;inset:0;z-index:9999;
     display:flex;align-items:center;justify-content:center;flex-direction:column;
-    opacity:1;transition:opacity 0.8s ease,transform 0.8s ease;
+    opacity:1;transition:opacity 1s ease,transform 1s cubic-bezier(.4,0,.2,1);
     overflow:hidden;
   }
-  .intro-bg{
-    position:absolute;inset:0;
-    background:var(--cream);
-  }
-  .intro-bg::after{
-    content:'';position:absolute;inset:0;
-    background:url('assets/bg-texture.png') center/cover no-repeat;
-    opacity:0.15;
-  }
-  .intro-content{
-    position:relative;z-index:2;text-align:center;
-    opacity:0;transform:translateY(20px);
-    animation:intro-fade-in 1.4s ease 0.3s forwards;
-  }
-  .intro-logo-main{
-    width:min(280px,60vw);height:auto;display:block;margin:0 auto 28px;
-  }
+  .intro-bg{position:absolute;inset:0;background:var(--cream)}
+  .intro-bg::after{content:'';position:absolute;inset:0;background:url('assets/bg-texture.png') center/cover no-repeat;opacity:0.12}
+  .intro-content{position:relative;z-index:2;text-align:center;padding:0 24px;
+    opacity:0;transform:translateY(16px) scale(0.96);animation:intro-in 1.6s ease 0.2s forwards}
+  .intro-logo-main{width:min(80vw,420px);height:auto;display:block;margin:0 auto 20px}
   .intro-tagline{
-    font-size:clamp(14px,2.2vw,18px);
-    color:var(--blue);font-weight:300;
-    letter-spacing:0.04em;line-height:1.5;
-    max-width:360px;margin:0 auto;
-    opacity:0;animation:intro-fade-in 1s ease 1.2s forwards;
+    font-size:clamp(13px,2vw,16px);color:var(--blue);font-weight:300;
+    letter-spacing:0.03em;line-height:1.5;max-width:340px;margin:0 auto;
+    opacity:0;animation:intro-in 0.8s ease 1.4s forwards;
   }
   .intro-tagline strong{font-weight:700}
-  .intro.leaving{opacity:0;transform:translateY(-40px);pointer-events:none}
-  @keyframes intro-fade-in{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
-  }
+  .intro.leaving{opacity:0;transform:translateY(-30px);pointer-events:none}
+  @keyframes intro-in{from{opacity:0;transform:translateY(16px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 
   /* ═══════════ HERO ═══════════ */
   .hero{
@@ -68,299 +45,193 @@
     display:flex;flex-direction:column;justify-content:center;
     padding:80px 24px 60px;
   }
-  .hero-bg{
-    position:absolute;inset:0;
-    background:url('assets/bg-texture.png') center/cover no-repeat;
-  }
-  .hero-bg::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(170deg,rgba(28,44,83,0.92) 0%,rgba(28,44,83,0.85) 50%,rgba(36,55,100,0.88) 100%);
-  }
-  .hero-inner{max-width:1000px;margin:0 auto;width:100%;position:relative;z-index:2;color:var(--cream)}
-  .hero-from{
-    font-size:13px;font-weight:400;opacity:0.55;margin-bottom:40px;line-height:1.6;
-    max-width:480px;
-  }
+  .hero-bg{position:absolute;inset:0;background:url('assets/bg-texture.png') center/cover no-repeat}
+  .hero-bg::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(170deg,rgba(28,44,83,0.91),rgba(20,31,58,0.93) 60%,rgba(36,55,100,0.90))}
+  .hero-inner{max-width:960px;margin:0 auto;width:100%;position:relative;z-index:2;color:var(--cream)}
+  .hero-logo{width:clamp(100px,20vw,160px);height:auto;margin-bottom:32px;filter:brightness(0) invert(1);opacity:0.85}
+  .hero-from{font-size:13px;font-weight:400;opacity:0.5;margin-bottom:36px;line-height:1.6;max-width:440px}
   .hero-from strong{font-weight:600;opacity:1}
   .hero-title{
     font-family:'Fraunces',Georgia,serif;
-    font-size:clamp(36px,7vw,76px);font-weight:400;line-height:1.06;
-    letter-spacing:-0.03em;margin-bottom:24px;max-width:800px;
+    font-size:clamp(34px,7vw,72px);font-weight:400;line-height:1.06;
+    letter-spacing:-0.03em;margin-bottom:24px;max-width:780px;
   }
   .hero-title em{font-style:italic;font-weight:300;color:var(--green-soft)}
-  .hero-sub{
-    font-size:clamp(15px,1.4vw,18px);max-width:580px;opacity:0.75;
-    line-height:1.65;margin-bottom:52px;font-weight:300;
+  .hero-highlight{
+    position:relative;display:inline;
+    background:linear-gradient(to top,rgba(114,191,68,0.25) 0%,rgba(114,191,68,0.25) 40%,transparent 40%);
+    padding:0 4px;
   }
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:620px;padding-top:28px;border-top:1px solid rgba(251,248,243,0.15)}
-  .stat-num{
-    font-family:'Fraunces',Georgia,serif;font-size:clamp(32px,5vw,52px);
-    font-weight:300;line-height:1;color:var(--cream);margin-bottom:4px;
-  }
-  .stat-label{font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.5}
+  .hero-sub{font-size:clamp(15px,1.4vw,17px);max-width:560px;opacity:0.7;line-height:1.65;margin-bottom:48px;font-weight:300}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:580px;padding-top:24px;border-top:1px solid rgba(251,248,243,0.15)}
+  .stat-num{font-family:'Fraunces',Georgia,serif;font-size:clamp(30px,5vw,48px);font-weight:300;line-height:1;color:var(--cream);margin-bottom:3px}
+  .stat-label{font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.45}
 
-  /* ═══════════ NAV ═══════════ */
-  .nav{
-    position:sticky;top:0;z-index:100;
-    background:rgba(251,248,243,0.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--line);padding:0 24px;
-  }
-  .nav-inner{
-    max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:6px;height:52px;
-    overflow-x:auto;-webkit-overflow-scrolling:touch;
-  }
-  .nav-inner::-webkit-scrollbar{display:none}
-  .nav-logo{width:28px;height:auto;margin-right:10px;flex-shrink:0}
-  .nav-btn{
-    background:0;border:1.5px solid transparent;color:var(--ink-soft);
-    padding:7px 14px;border-radius:100px;font-family:inherit;font-size:12px;font-weight:600;
-    cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;
-  }
-  .nav-btn:hover{color:var(--blue);border-color:var(--line)}
-  .nav-btn.active{background:var(--blue);color:var(--cream);border-color:var(--blue)}
-
-  /* ═══════════ JOURNEY TIMELINE ═══════════ */
+  /* ═══════════ JOURNEY ═══════════ */
   .journey{background:var(--white);padding:72px 24px 80px;border-bottom:1px solid var(--line)}
-  .journey .container{max-width:1000px;margin:0 auto}
-  .journey-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
-  .journey-title{
-    font-family:'Fraunces',Georgia,serif;font-size:clamp(26px,4vw,40px);
-    font-weight:400;color:var(--blue);margin-bottom:8px;letter-spacing:-0.02em;
-  }
-  .journey-sub{font-size:15px;color:var(--ink-soft);max-width:560px;margin-bottom:48px;line-height:1.6}
+  .journey .container{max-width:960px;margin:0 auto}
+  .j-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+  .j-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(24px,4vw,38px);font-weight:400;color:var(--blue);margin-bottom:8px;letter-spacing:-0.02em}
+  .j-sub{font-size:15px;color:var(--ink-soft);max-width:540px;margin-bottom:48px;line-height:1.6}
 
-  .timeline{position:relative;padding-left:48px}
-  .timeline::before{
-    content:'';position:absolute;left:15px;top:8px;bottom:8px;width:2px;
-    background:linear-gradient(to bottom,var(--green),var(--blue));
-    border-radius:2px;opacity:0.25;
-  }
-  .tl-stop{position:relative;padding-bottom:36px;cursor:pointer;transition:opacity 0.2s}
+  .timeline{position:relative;padding-left:44px}
+  .timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--line);border-radius:2px}
+  .tl-fill{position:absolute;left:13px;top:8px;width:2px;height:0;background:linear-gradient(to bottom,var(--green),var(--blue));border-radius:2px;transition:height 0.4s ease}
+
+  .tl-stop{position:relative;padding-bottom:32px;opacity:0.4;transform:translateX(-8px);transition:all 0.5s ease}
   .tl-stop:last-child{padding-bottom:0}
-  .tl-stop:hover{opacity:0.85}
+  .tl-stop.active{opacity:1;transform:translateX(0)}
   .tl-dot{
-    position:absolute;left:-41px;top:6px;width:18px;height:18px;
-    border-radius:50%;border:3px solid var(--green);background:var(--white);
-    z-index:2;transition:all 0.3s;
+    position:absolute;left:-39px;top:4px;width:16px;height:16px;
+    border-radius:50%;border:2.5px solid var(--line);background:var(--white);
+    z-index:2;transition:all 0.4s;
   }
-  .tl-stop:hover .tl-dot{background:var(--green);transform:scale(1.15)}
-  .tl-season{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
-  .tl-name{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,3vw,28px);font-weight:400;color:var(--blue);margin-bottom:4px;letter-spacing:-0.01em}
-  .tl-meta{font-size:13px;color:var(--ink-soft);margin-bottom:8px}
-  .tl-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;max-width:480px}
-
-  /* ═══════════ SCROLL PATH TRACKER ═══════════ */
-  .path-tracker{
-    position:fixed;left:12px;top:50%;z-index:90;
-    transform:translateY(-50%);
-    display:flex;flex-direction:column;align-items:center;gap:0;
-    opacity:0;transition:opacity 0.4s;pointer-events:none;
-  }
-  .path-tracker.visible{opacity:1}
-  .path-line{width:2px;height:120px;background:var(--line);border-radius:2px;position:relative}
-  .path-fill{
-    position:absolute;top:0;left:0;width:100%;height:0%;
-    background:linear-gradient(to bottom,var(--green),var(--blue));
-    border-radius:2px;transition:height 0.3s ease;
-  }
-  .path-logo{
-    width:32px;height:32px;border-radius:50%;
-    background:var(--white);border:2px solid var(--green);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 12px rgba(0,0,0,0.1);
-    transition:transform 0.3s;
-  }
-  .path-logo img{width:18px;height:auto}
-  .path-dots{display:flex;flex-direction:column;gap:24px;margin-top:8px}
-  .path-dot{
-    width:8px;height:8px;border-radius:50%;background:var(--line);
-    transition:background 0.3s,transform 0.3s;
-  }
-  .path-dot.active{background:var(--green);transform:scale(1.4)}
+  .tl-stop.active .tl-dot{border-color:var(--green);background:var(--green);box-shadow:0 0 0 4px rgba(114,191,68,0.15)}
+  .tl-season{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:3px}
+  .tl-name{font-family:'Fraunces',Georgia,serif;font-size:clamp(18px,3vw,26px);font-weight:400;color:var(--blue);margin-bottom:3px;letter-spacing:-0.01em}
+  .tl-meta{font-size:12px;color:var(--ink-soft);margin-bottom:6px}
+  .tl-desc{font-size:13px;color:var(--ink-soft);line-height:1.55;max-width:440px}
 
   /* ═══════════ SEASON SECTIONS ═══════════ */
-  .season-section{padding:72px 24px 88px}
-  .season-section:nth-child(odd){background:var(--cream)}
-  .season-section:nth-child(even){background:var(--white)}
-  .season-container{max-width:1000px;margin:0 auto}
+  .season-section{padding:72px 24px 80px;position:relative}
+  #s1{background:var(--s1-bg)}
+  #s2{background:var(--s2-bg)}
+  #s3{background:var(--s3-bg)}
+  #s4{background:var(--s4-bg)}
+  .season-container{max-width:960px;margin:0 auto}
 
-  .season-header{margin-bottom:36px}
-  .sh-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
-  .sh-title{
-    font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,5vw,44px);
-    font-weight:400;color:var(--blue);letter-spacing:-0.02em;line-height:1.1;margin-bottom:6px;
+  /* Season divider */
+  .season-divider{
+    height:48px;display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
   }
+  .season-divider::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+  .sd-logo{width:28px;height:28px;border-radius:50%;background:var(--white);
+    border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;
+    position:relative;z-index:2}
+  .sd-logo img{width:16px;height:auto}
+
+  .season-header{margin-bottom:32px}
+  .sh-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
+  .sh-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:var(--blue);letter-spacing:-0.02em;line-height:1.1;margin-bottom:5px}
   .sh-meta{font-size:13px;color:var(--ink-soft)}
 
   .season-narrative{
-    font-size:clamp(17px,1.8vw,20px);line-height:1.65;color:var(--ink);
-    max-width:680px;margin-bottom:52px;font-weight:300;
+    font-size:clamp(16px,1.8vw,19px);line-height:1.65;color:var(--ink);
+    max-width:640px;margin-bottom:48px;font-weight:300;
   }
 
-  /* ── Auto-scrolling Carousel ── */
-  .carousel-section{margin-bottom:52px;overflow:hidden}
-  .carousel-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);opacity:0.5;margin-bottom:16px}
-  .carousel-viewport{overflow:hidden;position:relative}
-  .carousel-track{
-    display:flex;gap:16px;
-    animation:marquee 40s linear infinite;
-    width:max-content;
-  }
-  .carousel-track:hover{animation-play-state:paused}
-  @keyframes marquee{
-    0%{transform:translateX(0)}
-    100%{transform:translateX(-50%)}
-  }
-  .carousel-item{
-    flex:0 0 240px;border-radius:12px;overflow:hidden;cursor:pointer;
-    box-shadow:0 4px 20px rgba(28,44,83,0.08);
+  /* ── Carousel ── */
+  .carousel-section{margin-bottom:48px;overflow:hidden}
+  .car-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);opacity:0.45;margin-bottom:14px}
+  .car-viewport{overflow:hidden;position:relative;margin:0 -24px;padding:0 0 12px}
+  .car-track{display:flex;gap:14px;will-change:transform}
+  .car-item{
+    flex:0 0 220px;border-radius:10px;overflow:hidden;cursor:pointer;
+    box-shadow:0 3px 16px rgba(28,44,83,0.07);
     transition:transform 0.3s,box-shadow 0.3s;background:var(--white);
   }
-  .carousel-item:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 12px 40px rgba(28,44,83,0.14)}
-  .carousel-item img{width:100%;height:auto;display:block}
-  .carousel-item .c-name{padding:10px 14px;font-size:12px;font-weight:700;color:var(--blue);text-align:center}
+  .car-item:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(28,44,83,0.12)}
+  .car-item img{width:100%;height:auto;display:block}
+  .car-item .c-name{padding:9px 12px;font-size:11px;font-weight:700;color:var(--blue);text-align:center}
 
   /* ── Lightbox ── */
-  .lightbox{
+  .lb{
     position:fixed;inset:0;z-index:9000;background:rgba(20,31,58,0.92);
     display:flex;align-items:center;justify-content:center;
-    opacity:0;pointer-events:none;transition:opacity 0.3s;
-    cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    opacity:0;pointer-events:none;transition:opacity 0.3s;cursor:pointer;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   }
-  .lightbox.active{opacity:1;pointer-events:auto}
-  .lightbox img{
-    max-width:min(90vw,500px);max-height:85vh;border-radius:16px;
-    box-shadow:0 20px 80px rgba(0,0,0,0.4);
-    transform:scale(0.9);transition:transform 0.3s;
-  }
-  .lightbox.active img{transform:scale(1)}
-  .lightbox-close{
-    position:absolute;top:20px;right:24px;width:44px;height:44px;
-    border-radius:50%;background:rgba(255,255,255,0.15);border:0;
-    color:white;font-size:24px;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-  }
+  .lb.on{opacity:1;pointer-events:auto}
+  .lb img{max-width:min(88vw,480px);max-height:82vh;border-radius:14px;
+    box-shadow:0 20px 80px rgba(0,0,0,0.4);transform:scale(0.9);transition:transform 0.3s}
+  .lb.on img{transform:scale(1)}
+  .lb-x{position:absolute;top:16px;right:20px;width:40px;height:40px;border-radius:50%;
+    background:rgba(255,255,255,0.12);border:0;color:#fff;font-size:22px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
 
   /* ── Word Cloud ── */
-  .cloud-section{margin-bottom:52px}
-  .cloud-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);opacity:0.5;margin-bottom:4px}
-  .cloud-hint{font-size:13px;color:var(--ink-soft);margin-bottom:16px}
+  .cloud-section{margin-bottom:48px}
+  .cl-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);opacity:0.45;margin-bottom:3px}
+  .cl-hint{font-size:13px;color:var(--ink-soft);margin-bottom:14px}
   .cloud{
-    position:relative;width:100%;max-width:640px;min-height:200px;
-    padding:32px 24px;
-    background:radial-gradient(ellipse at center,rgba(114,191,68,0.06) 0%,rgba(28,44,83,0.03) 60%,transparent 100%);
-    border-radius:24px;
+    position:relative;width:100%;max-width:600px;height:clamp(180px,30vw,260px);
   }
-  .cloud-word{
-    display:inline-block;margin:6px 4px;
-    font-weight:700;color:var(--blue);cursor:pointer;
-    padding:6px 14px;border-radius:100px;
-    border:1.5px solid transparent;
+  .cw{
+    position:absolute;font-weight:700;color:var(--blue);cursor:pointer;
+    padding:5px 12px;border-radius:100px;border:1.5px solid transparent;
     transition:all 0.2s;line-height:1.2;user-select:none;-webkit-user-select:none;
+    white-space:nowrap;transform:translate(-50%,-50%);
   }
-  .cloud-word:hover{border-color:var(--green);background:var(--green-pale)}
-  .cloud-word.active{background:var(--green);color:var(--white);border-color:var(--green)}
-  .cloud-word.xl{font-size:clamp(24px,4vw,32px)}
-  .cloud-word.lg{font-size:clamp(18px,3vw,24px)}
-  .cloud-word.md{font-size:clamp(15px,2.5vw,18px)}
-  .cloud-word.sm{font-size:clamp(12px,2vw,14px);color:var(--blue-mid);font-weight:600}
+  .cw:hover{border-color:var(--green);background:var(--green-pale)}
+  .cw.on{background:var(--green);color:var(--white);border-color:var(--green)}
+  .cw.xl{font-size:clamp(22px,4vw,30px)}
+  .cw.lg{font-size:clamp(17px,3vw,22px)}
+  .cw.md{font-size:clamp(14px,2.5vw,17px)}
+  .cw.sm{font-size:clamp(11px,2vw,13px);color:var(--blue-mid);font-weight:600}
 
-  .cloud-reveal{
-    max-height:0;overflow:hidden;transition:max-height 0.4s ease,opacity 0.3s;opacity:0;max-width:640px;
-  }
-  .cloud-reveal.active{max-height:220px;opacity:1;margin-top:14px}
-  .cloud-reveal-inner{
-    background:var(--white);border-left:3px solid var(--green);
-    padding:18px 22px;border-radius:0 10px 10px 0;
-    box-shadow:0 4px 16px rgba(28,44,83,0.06);
-  }
-  .cloud-reveal-inner q{
-    font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:400;
-    line-height:1.55;color:var(--ink);display:block;margin-bottom:6px;
-    quotes:"\201C" "\201D";font-style:italic;
-  }
-  .cloud-reveal-inner .speaker{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green)}
+  .cr{max-height:0;overflow:hidden;transition:max-height 0.4s,opacity 0.3s;opacity:0;max-width:600px}
+  .cr.on{max-height:200px;opacity:1;margin-top:12px}
+  .cr-in{background:var(--white);border-left:3px solid var(--green);padding:16px 20px;border-radius:0 8px 8px 0;box-shadow:0 4px 16px rgba(28,44,83,0.05)}
+  .cr-in q{font-family:'Fraunces',Georgia,serif;font-size:15px;font-weight:400;line-height:1.55;color:var(--ink);display:block;margin-bottom:5px;quotes:"\201C" "\201D";font-style:italic}
+  .cr-in .sp{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green)}
 
   /* ── Wayne ── */
-  .wayne-block{
-    background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 100%);
-    color:var(--cream);border-radius:12px;padding:36px 32px;
-    margin-bottom:20px;position:relative;overflow:hidden;
+  .wb{
+    background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+    color:var(--cream);border-radius:12px;padding:32px 28px;position:relative;overflow:hidden;
   }
-  .wayne-block::after{
-    content:'';position:absolute;bottom:-50px;right:-50px;width:180px;height:180px;
-    background:radial-gradient(circle,rgba(114,191,68,0.2) 0%,transparent 70%);border-radius:50%;
-  }
-  .wayne-ey{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.55;margin-bottom:14px;font-weight:700}
-  .wayne-block q{
-    font-family:'Fraunces',Georgia,serif;font-size:clamp(18px,2.5vw,24px);
-    font-weight:400;line-height:1.45;font-style:italic;display:block;
-    max-width:600px;quotes:"\201C" "\201D";position:relative;z-index:2;
-  }
-  .wayne-attr{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.45;margin-top:14px}
+  .wb::after{content:'';position:absolute;bottom:-40px;right:-40px;width:160px;height:160px;
+    background:radial-gradient(circle,rgba(114,191,68,0.18),transparent 70%);border-radius:50%}
+  .wb-ey{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.5;margin-bottom:12px;font-weight:700}
+  .wb q{font-family:'Fraunces',Georgia,serif;font-size:clamp(17px,2.5vw,22px);font-weight:400;line-height:1.45;font-style:italic;display:block;max-width:560px;quotes:"\201C" "\201D";position:relative;z-index:2}
+  .wb-a{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.4;margin-top:12px}
 
   /* ═══════════ POSSIBILITIES ═══════════ */
-  .possibilities{
-    background:var(--cream-warm);padding:72px 24px;border-top:1px solid var(--line);
-  }
-  .possibilities .container{max-width:720px;margin:0 auto;text-align:center}
-  .poss-icon{width:48px;height:auto;opacity:0.3;margin:0 auto 24px;display:block}
-  .poss-title{
-    font-family:'Fraunces',Georgia,serif;font-size:clamp(22px,3.5vw,32px);
-    font-weight:400;color:var(--blue);margin-bottom:16px;letter-spacing:-0.02em;
-  }
-  .poss-body{font-size:15px;color:var(--ink-soft);line-height:1.7;max-width:560px;margin:0 auto 24px}
-  .poss-features{
-    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;
-  }
-  .poss-tag{
-    font-size:12px;font-weight:600;color:var(--blue);
-    padding:8px 18px;border-radius:100px;
-    background:var(--white);border:1px solid var(--line);
-  }
+  .poss{background:var(--cream-warm);padding:64px 24px;border-top:1px solid var(--line)}
+  .poss .container{max-width:560px;margin:0 auto;text-align:center}
+  .poss-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,3vw,28px);font-weight:400;color:var(--blue);margin-bottom:12px;letter-spacing:-0.01em}
+  .poss-body{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:20px}
+  .poss-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .poss-tag{font-size:11px;font-weight:600;color:var(--blue);padding:7px 16px;border-radius:100px;background:var(--white);border:1px solid var(--line)}
 
   /* ═══════════ OUTRO ═══════════ */
-  .outro{
-    background:var(--blue);color:var(--cream);padding:88px 24px;
-    text-align:center;position:relative;overflow:hidden;
-  }
-  .outro::before{
-    content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
-    width:400px;height:400px;
-    background:radial-gradient(circle,rgba(114,191,68,0.1) 0%,transparent 70%);border-radius:50%;
-  }
-  .outro-logo{width:64px;height:auto;filter:brightness(0) invert(1);opacity:0.25;margin:0 auto 32px;display:block}
-  .outro h2{
-    font-family:'Fraunces',Georgia,serif;font-size:clamp(26px,4vw,44px);
-    font-weight:400;line-height:1.2;max-width:620px;margin:0 auto 16px;
-    letter-spacing:-0.02em;position:relative;z-index:2;
-  }
-  .outro p{font-size:15px;opacity:0.65;max-width:480px;margin:0 auto;line-height:1.65;font-weight:300}
-  .outro .mark{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.3;margin-top:44px}
+  .outro{background:var(--blue);color:var(--cream);padding:72px 24px;text-align:center;position:relative;overflow:hidden}
+  .outro::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:360px;height:360px;
+    background:radial-gradient(circle,rgba(114,191,68,0.08),transparent 70%);border-radius:50%}
+  .outro-logo{width:56px;height:auto;filter:brightness(0) invert(1);opacity:0.2;margin:0 auto 24px;display:block}
+  .outro p{font-size:15px;opacity:0.6;max-width:420px;margin:0 auto;line-height:1.65;font-weight:300;position:relative;z-index:2}
+  .outro .mark{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.3;margin-top:36px}
 
   /* ═══════════ FADE-IN ═══════════ */
-  .fi{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
+  .fi{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
   .fi.v{opacity:1;transform:translateY(0)}
 
-  /* ═══════════ RESPONSIVE ═══════════ */
-  @media(max-width:860px){
-    .stats{grid-template-columns:repeat(2,1fr)}
-    .path-tracker{left:6px}
-    .path-logo{width:26px;height:26px}
-    .path-logo img{width:14px}
-    .path-line{height:80px}
-    .carousel-item{flex:0 0 200px}
+  /* ═══════════ BACK TO TOP ═══════════ */
+  .btt{
+    position:fixed;bottom:20px;right:20px;z-index:90;
+    width:40px;height:40px;border-radius:50%;
+    background:var(--white);border:1.5px solid var(--line);
+    box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;opacity:0;pointer-events:none;transition:opacity 0.3s;
+    font-size:16px;color:var(--blue);
   }
+  .btt.show{opacity:1;pointer-events:auto}
+
+  /* ═══════════ RESPONSIVE ═══════════ */
   @media(max-width:480px){
     .hero{padding:60px 20px 40px;min-height:92vh}
-    .season-section{padding:56px 20px 72px}
-    .intro-logo-main{width:min(240px,65vw)}
-    .carousel-item{flex:0 0 180px}
-    .cloud{padding:20px 16px}
-    .wayne-block{padding:28px 22px}
-    .timeline{padding-left:40px}
-    .tl-dot{left:-33px}
-    .path-tracker{display:none}
+    .hero-logo{width:90px}
+    .season-section{padding:56px 20px 68px}
+    .car-item{flex:0 0 180px}
+    .cloud{height:clamp(160px,40vw,200px)}
+    .cw.xl{font-size:20px}.cw.lg{font-size:16px}
+    .wb{padding:24px 20px}
+    .timeline{padding-left:36px}
+    .tl-dot{left:-31px;width:14px;height:14px}
+    .intro-logo-main{width:min(85vw,360px)}
   }
 </style>
 </head>
@@ -379,325 +250,193 @@
 <header class="hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
+    <img class="hero-logo" src="assets/logo.png" alt="Healthy Minds">
     <div class="hero-from">From your production partners at <strong>VidPod</strong> — a way to see and reflect on the journey you've been on.</div>
-    <h1 class="hero-title">Four seasons.<br>One conversation<br>that keeps <em>getting braver.</em></h1>
+    <h1 class="hero-title">Four seasons.<br>One conversation<br>that keeps <span class="hero-highlight"><em>getting braver.</em></span></h1>
     <p class="hero-sub">A look back at how Fonterra's mental health podcast has evolved — from breaking the silence to rebuilding identity to leadership as daily practice. Twenty-four conversations. One continuing story.</p>
     <div class="stats">
       <div><div class="stat-num" data-count="24">0</div><div class="stat-label">Episodes</div></div>
       <div><div class="stat-num" data-count="4">0</div><div class="stat-label">Seasons</div></div>
-      <div><div class="stat-num" data-count="2022" data-noanim>2022</div><div class="stat-label">Launched</div></div>
+      <div><div class="stat-num" data-count="2022" data-static>2022</div><div class="stat-label">Launched</div></div>
       <div><div class="stat-num" data-count="860">0</div><div class="stat-label">Minutes</div></div>
     </div>
   </div>
 </header>
 
-<!-- ═══ NAV ═══ -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <img class="nav-logo" src="assets/logo.png" alt="">
-    <button class="nav-btn" data-target="journey">Journey</button>
-    <button class="nav-btn" data-target="s1">S1 · Silence</button>
-    <button class="nav-btn" data-target="s2">S2 · Identity</button>
-    <button class="nav-btn" data-target="s3">S3 · Tools</button>
-    <button class="nav-btn" data-target="s4">S4 · Leadership</button>
-  </div>
-</nav>
+<!-- ═══ BACK TO TOP (replaces nav) ═══ -->
+<button class="btt" id="btt" aria-label="Back to top">&#8593;</button>
 
-<!-- ═══ SCROLL PATH TRACKER ═══ -->
-<div class="path-tracker" id="pathTracker">
-  <div class="path-logo"><img src="assets/logo.png" alt=""></div>
-  <div class="path-line"><div class="path-fill" id="pathFill"></div></div>
-  <div class="path-dots">
-    <div class="path-dot" data-season="s1"></div>
-    <div class="path-dot" data-season="s2"></div>
-    <div class="path-dot" data-season="s3"></div>
-    <div class="path-dot" data-season="s4"></div>
-  </div>
-</div>
-
-<!-- ═══ JOURNEY TIMELINE ═══ -->
+<!-- ═══ JOURNEY ═══ -->
 <section class="journey" id="journey">
   <div class="container">
-    <div class="journey-eyebrow fi">The Journey</div>
-    <h2 class="journey-title fi">Four years. One continuing conversation.</h2>
-    <p class="journey-sub fi">Each season took the conversation deeper. Together they tell the story of what happens when a workplace commits to showing up — and keeps going.</p>
-
-    <div class="timeline fi">
-      <div class="tl-stop" data-target="s1">
-        <div class="tl-dot"></div>
-        <div class="tl-season">Season 1</div>
-        <div class="tl-name">Break the Silence</div>
-        <div class="tl-meta">2022 · 7 guests</div>
-        <div class="tl-desc">The first brave step. Fonterra people sharing lived experience for the first time — the quiet weight of not being okay.</div>
-      </div>
-      <div class="tl-stop" data-target="s2">
-        <div class="tl-dot"></div>
-        <div class="tl-season">Season 2</div>
-        <div class="tl-name">Identity &amp; Rebuilding</div>
-        <div class="tl-meta">5 guests</div>
-        <div class="tl-desc">From disclosure to reconstruction. Wrestling with who you are outside the roles you've built.</div>
-      </div>
-      <div class="tl-stop" data-target="s3">
-        <div class="tl-dot"></div>
-        <div class="tl-season">Season 3</div>
-        <div class="tl-name">Tools &amp; Prevention</div>
-        <div class="tl-meta">6 guests</div>
-        <div class="tl-desc">The pivot from "tell your story" to "here's what actually helps." Frameworks and practice, not just experience.</div>
-      </div>
-      <div class="tl-stop" data-target="s4">
-        <div class="tl-dot"></div>
-        <div class="tl-season">Season 4</div>
-        <div class="tl-name">Leadership as Practice</div>
-        <div class="tl-meta">6 guests</div>
-        <div class="tl-desc">The mirror turns to leaders. The way you show up is already teaching your team what's allowed.</div>
-      </div>
+    <div class="j-eyebrow fi">The Journey</div>
+    <h2 class="j-title fi">Four years. One continuing conversation.</h2>
+    <p class="j-sub fi">Each season took the conversation deeper. Together they tell the story of what changes when a workplace keeps showing up — and goes further every time.</p>
+    <div class="timeline fi" id="timeline">
+      <div class="tl-fill" id="tlFill"></div>
+      <div class="tl-stop" data-idx="0"><div class="tl-dot"></div><div class="tl-season">Season 1</div><div class="tl-name">Break the Silence</div><div class="tl-meta">2022 · 7 guests</div><div class="tl-desc">The first brave step. Fonterra people sharing lived experience for the first time.</div></div>
+      <div class="tl-stop" data-idx="1"><div class="tl-dot"></div><div class="tl-season">Season 2</div><div class="tl-name">Identity &amp; Rebuilding</div><div class="tl-meta">5 guests</div><div class="tl-desc">From disclosure to reconstruction. Wrestling with who you are outside the roles you've built.</div></div>
+      <div class="tl-stop" data-idx="2"><div class="tl-dot"></div><div class="tl-season">Season 3</div><div class="tl-name">Tools &amp; Prevention</div><div class="tl-meta">6 guests</div><div class="tl-desc">The pivot from "tell your story" to "here's what actually helps."</div></div>
+      <div class="tl-stop" data-idx="3"><div class="tl-dot"></div><div class="tl-season">Season 4</div><div class="tl-name">Leadership as Practice</div><div class="tl-meta">6 guests</div><div class="tl-desc">The mirror turns to leaders. The way you show up is already teaching your team what's allowed.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SEASON 1 ═══ -->
+<!-- ═══ S1 ═══ -->
+<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
 <section class="season-section" id="s1">
   <div class="season-container">
-    <div class="season-header fi">
-      <div class="sh-label">Season 1 · 2022</div>
-      <h2 class="sh-title">Break the Silence</h2>
-      <div class="sh-meta">7 guests · The first brave step</div>
-    </div>
+    <div class="season-header fi"><div class="sh-label">Season 1 · 2022</div><h2 class="sh-title">Break the Silence</h2><div class="sh-meta">7 guests · The first brave step</div></div>
     <p class="season-narrative fi">Season 1 didn't try to solve anything. It tried to make space. Fonterra people told stories they'd never said out loud at work — loss, depression, the weight of carrying it alone. The bravery isn't in the answers; it's in the fact that anyone showed up to answer at all.</p>
-
-    <div class="carousel-section fi">
-      <div class="carousel-label">Voices of Season 1</div>
-      <div class="carousel-viewport">
-        <div class="carousel-track" data-speed="38">
-          <div class="carousel-item" data-full="assets/quotes/s1-kathy.png"><img src="assets/quotes/s1-kathy.png" alt="Kathy Antoniadis" loading="lazy"><div class="c-name">Kathy Antoniadis</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-craig.png"><img src="assets/quotes/s1-craig.png" alt="Craig Dickerson" loading="lazy"><div class="c-name">Craig Dickerson</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-michelle.png"><img src="assets/quotes/s1-michelle.png" alt="Michelle Godberg" loading="lazy"><div class="c-name">Michelle Godberg</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-rene.png"><img src="assets/quotes/s1-rene.png" alt="René De Doncker" loading="lazy"><div class="c-name">René De Doncker</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-jeff.png"><img src="assets/quotes/s1-jeff.png" alt="Jeff Dew" loading="lazy"><div class="c-name">Jeff Dew</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-rob.png"><img src="assets/quotes/s1-rob.png" alt="Rob Howell" loading="lazy"><div class="c-name">Rob Howell</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-sarah.png"><img src="assets/quotes/s1-sarah.png" alt="Sarah Counsell" loading="lazy"><div class="c-name">Sarah Counsell</div></div>
-          <!-- Duplicate for seamless loop -->
-          <div class="carousel-item" data-full="assets/quotes/s1-kathy.png"><img src="assets/quotes/s1-kathy.png" alt="Kathy Antoniadis" loading="lazy"><div class="c-name">Kathy Antoniadis</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-craig.png"><img src="assets/quotes/s1-craig.png" alt="Craig Dickerson" loading="lazy"><div class="c-name">Craig Dickerson</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-michelle.png"><img src="assets/quotes/s1-michelle.png" alt="Michelle Godberg" loading="lazy"><div class="c-name">Michelle Godberg</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-rene.png"><img src="assets/quotes/s1-rene.png" alt="René De Doncker" loading="lazy"><div class="c-name">René De Doncker</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-jeff.png"><img src="assets/quotes/s1-jeff.png" alt="Jeff Dew" loading="lazy"><div class="c-name">Jeff Dew</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-rob.png"><img src="assets/quotes/s1-rob.png" alt="Rob Howell" loading="lazy"><div class="c-name">Rob Howell</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s1-sarah.png"><img src="assets/quotes/s1-sarah.png" alt="Sarah Counsell" loading="lazy"><div class="c-name">Sarah Counsell</div></div>
-        </div>
-      </div>
-    </div>
-
+    <div class="carousel-section fi"><div class="car-label">Voices of Season 1</div><div class="car-viewport"><div class="car-track" id="ct-s1" data-items="7">
+      <div class="car-item" data-full="assets/quotes/s1-kathy.png"><img src="assets/quotes/s1-kathy.png" alt="Kathy Antoniadis" loading="lazy"><div class="c-name">Kathy Antoniadis</div></div>
+      <div class="car-item" data-full="assets/quotes/s1-craig.png"><img src="assets/quotes/s1-craig.png" alt="Craig Dickerson" loading="lazy"><div class="c-name">Craig Dickerson</div></div>
+      <div class="car-item" data-full="assets/quotes/s1-michelle.png"><img src="assets/quotes/s1-michelle.png" alt="Michelle Godberg" loading="lazy"><div class="c-name">Michelle Godberg</div></div>
+      <div class="car-item" data-full="assets/quotes/s1-rene.png"><img src="assets/quotes/s1-rene.png" alt="René De Doncker" loading="lazy"><div class="c-name">René De Doncker</div></div>
+      <div class="car-item" data-full="assets/quotes/s1-jeff.png"><img src="assets/quotes/s1-jeff.png" alt="Jeff Dew" loading="lazy"><div class="c-name">Jeff Dew</div></div>
+      <div class="car-item" data-full="assets/quotes/s1-rob.png"><img src="assets/quotes/s1-rob.png" alt="Rob Howell" loading="lazy"><div class="c-name">Rob Howell</div></div>
+      <div class="car-item" data-full="assets/quotes/s1-sarah.png"><img src="assets/quotes/s1-sarah.png" alt="Sarah Counsell" loading="lazy"><div class="c-name">Sarah Counsell</div></div>
+    </div></div></div>
     <div class="cloud-section fi">
-      <div class="cloud-label">Where the conversation went deep</div>
-      <div class="cloud-hint">Tap a word to hear its story</div>
+      <div class="cl-label">The moments that surfaced</div>
+      <div class="cl-hint">Tap a word to hear its story</div>
       <div class="cloud" id="cloud-s1">
-        <span class="cloud-word xl" data-quote="The moment I shared my story with the people who are genuinely close friends to me, I kind of felt unburdened. It was like this weight was lifted off my shoulders — the dirty little secret." data-speaker="Kathy Antoniadis">silence</span>
-        <span class="cloud-word lg" data-quote="It's okay to not be okay. I mean, it is. So, yeah — be kind to yourself, I think." data-speaker="Michelle Godberg">shame</span>
-        <span class="cloud-word md" data-quote="I just realised that life was just rubbish. I've got to change." data-speaker="Craig Dickerson">loss</span>
-        <span class="cloud-word lg" data-quote="It's okay to not be okay. Be kind to yourself." data-speaker="Michelle Godberg">okay</span>
-        <span class="cloud-word sm" data-quote="I should have been more open with Ro. I would just have started the conversation a lot earlier." data-speaker="Rob Howell">burden</span>
-        <span class="cloud-word md" data-quote="You don't have to have experience in these tough times. Just be there and just try to be there for people." data-speaker="Sarah Counsell">kind</span>
-        <span class="cloud-word sm" data-quote="There's nothing better than being able to be yourself at work, right? I can be me." data-speaker="René De Doncker">hidden</span>
-        <span class="cloud-word md" data-quote="A support network is not someone that just agrees with your view." data-speaker="Jeff Dew">story</span>
-        <span class="cloud-word sm" data-quote="The moment I shared my story... I felt unburdened." data-speaker="Kathy Antoniadis">unburdened</span>
-        <span class="cloud-word lg" data-quote="I should have been more open. It doesn't have to be big before you start talking about an issue." data-speaker="Rob Howell">alone</span>
-        <span class="cloud-word sm" data-quote="When people are safe and healthy and well, the rest of it sort of ultimately falls into place." data-speaker="Craig Dickerson">brave</span>
-        <span class="cloud-word md" data-quote="The moment I shared my story... this weight was lifted off my shoulders." data-speaker="Kathy Antoniadis">weight</span>
+        <span class="cw xl" style="left:38%;top:40%" data-quote="The moment I shared my story with the people who are genuinely close friends to me, I kind of felt unburdened. It was like this weight was lifted off my shoulders — the dirty little secret." data-speaker="Kathy Antoniadis">silence</span>
+        <span class="cw lg" style="left:72%;top:28%" data-quote="It's okay to not be okay. I mean, it is. So, yeah — be kind to yourself, I think." data-speaker="Michelle Godberg">shame</span>
+        <span class="cw lg" style="left:18%;top:22%" data-quote="I just realised that life was just rubbish. I've got to change." data-speaker="Craig Dickerson">loss</span>
+        <span class="cw md" style="left:60%;top:62%" data-quote="It's okay to not be okay. Be kind to yourself." data-speaker="Michelle Godberg">okay</span>
+        <span class="cw sm" style="left:85%;top:55%" data-quote="I should have been more open with Ro. I would just have started the conversation a lot earlier." data-speaker="Rob Howell">burden</span>
+        <span class="cw md" style="left:25%;top:65%" data-quote="You don't have to have experience in these tough times. Just be there and just try to be there for people." data-speaker="Sarah Counsell">kind</span>
+        <span class="cw sm" style="left:52%;top:15%" data-quote="There's nothing better than being able to be yourself at work, right? I can be me." data-speaker="René De Doncker">hidden</span>
+        <span class="cw md" style="left:80%;top:80%" data-quote="A support network is not someone that just agrees with your view." data-speaker="Jeff Dew">story</span>
+        <span class="cw sm" style="left:15%;top:82%" data-quote="The moment I shared my story... I felt unburdened." data-speaker="Kathy Antoniadis">unburdened</span>
+        <span class="cw lg" style="left:48%;top:78%" data-quote="I should have been more open. It doesn't have to be big before you start talking about an issue." data-speaker="Rob Howell">alone</span>
+        <span class="cw sm" style="left:10%;top:48%" data-quote="When people are safe and healthy and well, the rest of it sort of ultimately falls into place." data-speaker="Craig Dickerson">brave</span>
+        <span class="cw md" style="left:68%;top:45%" data-quote="The moment I shared my story... this weight was lifted off my shoulders." data-speaker="Kathy Antoniadis">weight</span>
       </div>
-      <div class="cloud-reveal" id="reveal-s1"><div class="cloud-reveal-inner"><q></q><div class="speaker"></div></div></div>
+      <div class="cr" id="reveal-s1"><div class="cr-in"><q></q><div class="sp"></div></div></div>
     </div>
-
-    <div class="wayne-block fi">
-      <div class="wayne-ey">A question that cut through</div>
-      <q>So when was the moment you realised you couldn't keep carrying this on your own?</q>
-      <div class="wayne-attr">— Wayne Schwass, Host</div>
-    </div>
+    <div class="wb fi"><div class="wb-ey">A question that cut through</div><q>So when was the moment you realised you couldn't keep carrying this on your own?</q><div class="wb-a">— Wayne Schwass, Host</div></div>
   </div>
 </section>
 
-<!-- ═══ SEASON 2 ═══ -->
+<!-- ═══ S2 ═══ -->
+<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
 <section class="season-section" id="s2">
   <div class="season-container">
-    <div class="season-header fi">
-      <div class="sh-label">Season 2</div>
-      <h2 class="sh-title">Identity &amp; Rebuilding</h2>
-      <div class="sh-meta">5 guests · From disclosure to reconstruction</div>
-    </div>
+    <div class="season-header fi"><div class="sh-label">Season 2</div><h2 class="sh-title">Identity &amp; Rebuilding</h2><div class="sh-meta">5 guests · From disclosure to reconstruction</div></div>
     <p class="season-narrative fi">If Season 1 was about breaking silence, Season 2 was about what you do next. Guests stopped asking whether they could talk and started asking who they wanted to become afterwards. The stories got more specific, the pain more named, and the hope more earned.</p>
-
-    <div class="carousel-section fi">
-      <div class="carousel-label">Voices of Season 2</div>
-      <div class="carousel-viewport">
-        <div class="carousel-track" data-speed="35">
-          <div class="carousel-item" data-full="assets/quotes/s2-kahla.png"><img src="assets/quotes/s2-kahla.png" alt="Kahla Summers" loading="lazy"><div class="c-name">Kahla Summers</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-rohan.png"><img src="assets/quotes/s2-rohan.png" alt="Rohan Morris" loading="lazy"><div class="c-name">Rohan Morris</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-mark.png"><img src="assets/quotes/s2-mark.png" alt="Mark Sanderlands" loading="lazy"><div class="c-name">Mark Sanderlands</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-pat.png"><img src="assets/quotes/s2-pat.png" alt="Pat Russell" loading="lazy"><div class="c-name">Pat Russell</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-peter.png"><img src="assets/quotes/s2-peter.png" alt="Pete Pezzamenti" loading="lazy"><div class="c-name">Pete Pezzamenti</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-kahla.png"><img src="assets/quotes/s2-kahla.png" alt="Kahla Summers" loading="lazy"><div class="c-name">Kahla Summers</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-rohan.png"><img src="assets/quotes/s2-rohan.png" alt="Rohan Morris" loading="lazy"><div class="c-name">Rohan Morris</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-mark.png"><img src="assets/quotes/s2-mark.png" alt="Mark Sanderlands" loading="lazy"><div class="c-name">Mark Sanderlands</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-pat.png"><img src="assets/quotes/s2-pat.png" alt="Pat Russell" loading="lazy"><div class="c-name">Pat Russell</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s2-peter.png"><img src="assets/quotes/s2-peter.png" alt="Pete Pezzamenti" loading="lazy"><div class="c-name">Pete Pezzamenti</div></div>
-        </div>
-      </div>
-    </div>
-
+    <div class="carousel-section fi"><div class="car-label">Voices of Season 2</div><div class="car-viewport"><div class="car-track" id="ct-s2" data-items="5">
+      <div class="car-item" data-full="assets/quotes/s2-kahla.png"><img src="assets/quotes/s2-kahla.png" alt="Kahla Summers" loading="lazy"><div class="c-name">Kahla Summers</div></div>
+      <div class="car-item" data-full="assets/quotes/s2-rohan.png"><img src="assets/quotes/s2-rohan.png" alt="Rohan Morris" loading="lazy"><div class="c-name">Rohan Morris</div></div>
+      <div class="car-item" data-full="assets/quotes/s2-mark.png"><img src="assets/quotes/s2-mark.png" alt="Mark Sanderlands" loading="lazy"><div class="c-name">Mark Sanderlands</div></div>
+      <div class="car-item" data-full="assets/quotes/s2-pat.png"><img src="assets/quotes/s2-pat.png" alt="Pat Russell" loading="lazy"><div class="c-name">Pat Russell</div></div>
+      <div class="car-item" data-full="assets/quotes/s2-peter.png"><img src="assets/quotes/s2-peter.png" alt="Pete Pezzamenti" loading="lazy"><div class="c-name">Pete Pezzamenti</div></div>
+    </div></div></div>
     <div class="cloud-section fi">
-      <div class="cloud-label">Where the conversation went deep</div>
-      <div class="cloud-hint">Tap a word to hear its story</div>
+      <div class="cl-label">The moments that surfaced</div>
+      <div class="cl-hint">Tap a word to hear its story</div>
       <div class="cloud" id="cloud-s2">
-        <span class="cloud-word xl" data-quote="I love and inspire to be that balance. Work or at home, you're the same person. I know I'm not. And I'm working on that because there's a good person on both sides." data-speaker="Mark Sanderlands">identity</span>
-        <span class="cloud-word lg" data-quote="If you open up, if you start the conversation with someone, get the vibe of how they are, they'll open up to you." data-speaker="Rohan Morris">rebuild</span>
-        <span class="cloud-word md" data-quote="I would tell him that I love him. That would be the first thing I would say." data-speaker="Kahla Summers">father</span>
-        <span class="cloud-word lg" data-quote="I love and inspire to be that balance. Work or at home, you're the same person." data-speaker="Mark Sanderlands">balance</span>
-        <span class="cloud-word md" data-quote="If you open up, start the conversation... they'll open up to you." data-speaker="Rohan Morris">open up</span>
-        <span class="cloud-word sm" data-quote="She said — you know what you're going through, what you've been through is completely normal. And it's okay to get emotional about it." data-speaker="Pat Russell">normal</span>
-        <span class="cloud-word md" data-quote="I promise that together we can make it better." data-speaker="Kahla Summers">together</span>
-        <span class="cloud-word sm" data-quote="If I can't have this conversation with someone I've known for the better part of 20 years, why can't I have it with someone I've known for the better part of 20 seconds?" data-speaker="Pete Pezzamenti">honest</span>
-        <span class="cloud-word lg" data-quote="I would tell him that I love him. That would be the first thing I would say. And the second would be — I know that life isn't going well, but I promise that together we can make it better." data-speaker="Kahla Summers">love</span>
-        <span class="cloud-word md" data-quote="I promise that together we can make it better." data-speaker="Kahla Summers">promise</span>
-        <span class="cloud-word sm" data-quote="Get the vibe of how they are, they'll open up to you." data-speaker="Rohan Morris">courage</span>
+        <span class="cw xl" style="left:42%;top:38%" data-quote="I love and inspire to be that balance. Work or at home, you're the same person. I know I'm not. And I'm working on that because there's a good person on both sides." data-speaker="Mark Sanderlands">identity</span>
+        <span class="cw lg" style="left:15%;top:25%" data-quote="If you open up, if you start the conversation with someone, get the vibe of how they are, they'll open up to you." data-speaker="Rohan Morris">rebuild</span>
+        <span class="cw md" style="left:75%;top:20%" data-quote="I would tell him that I love him. That would be the first thing I would say." data-speaker="Kahla Summers">father</span>
+        <span class="cw lg" style="left:70%;top:50%" data-quote="I love and inspire to be that balance. Work or at home, you're the same person." data-speaker="Mark Sanderlands">balance</span>
+        <span class="cw md" style="left:22%;top:58%" data-quote="If you open up, start the conversation... they'll open up to you." data-speaker="Rohan Morris">open up</span>
+        <span class="cw sm" style="left:88%;top:72%" data-quote="She said — you know what you're going through, what you've been through is completely normal. And it's okay to get emotional about it." data-speaker="Pat Russell">normal</span>
+        <span class="cw md" style="left:50%;top:70%" data-quote="I promise that together we can make it better." data-speaker="Kahla Summers">together</span>
+        <span class="cw sm" style="left:10%;top:80%" data-quote="If I can't have this conversation with someone I've known for the better part of 20 years, why can't I have it with someone I've known for the better part of 20 seconds?" data-speaker="Pete Pezzamenti">honest</span>
+        <span class="cw lg" style="left:35%;top:15%" data-quote="I would tell him that I love him. That would be the first thing I would say. And the second would be — I know that life isn't going well, but I promise that together we can make it better." data-speaker="Kahla Summers">love</span>
+        <span class="cw md" style="left:82%;top:35%" data-quote="I promise that together we can make it better." data-speaker="Kahla Summers">promise</span>
       </div>
-      <div class="cloud-reveal" id="reveal-s2"><div class="cloud-reveal-inner"><q></q><div class="speaker"></div></div></div>
+      <div class="cr" id="reveal-s2"><div class="cr-in"><q></q><div class="sp"></div></div></div>
     </div>
-
-    <div class="wayne-block fi">
-      <div class="wayne-ey">A question that cut through</div>
-      <q>If you could sit with him now — what would you want him to know?</q>
-      <div class="wayne-attr">— Wayne Schwass, Host</div>
-    </div>
+    <div class="wb fi"><div class="wb-ey">A question that cut through</div><q>If you could sit with him now — what would you want him to know?</q><div class="wb-a">— Wayne Schwass, Host</div></div>
   </div>
 </section>
 
-<!-- ═══ SEASON 3 ═══ -->
+<!-- ═══ S3 ═══ -->
+<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
 <section class="season-section" id="s3">
   <div class="season-container">
-    <div class="season-header fi">
-      <div class="sh-label">Season 3</div>
-      <h2 class="sh-title">Tools &amp; Prevention</h2>
-      <div class="sh-meta">6 guests · From story to practice</div>
-    </div>
+    <div class="season-header fi"><div class="sh-label">Season 3</div><h2 class="sh-title">Tools &amp; Prevention</h2><div class="sh-meta">6 guests · From story to practice</div></div>
     <p class="season-narrative fi">Season 3 pivoted. Instead of "here's what happened to me," guests brought something closer to "here's what actually helps." Financial wellbeing, physical health, stoic thinking, self-kindness. The podcast stopped being only a confessional and started being a toolkit.</p>
-
-    <div class="carousel-section fi">
-      <div class="carousel-label">Voices of Season 3</div>
-      <div class="carousel-viewport">
-        <div class="carousel-track" data-speed="36">
-          <div class="carousel-item" data-full="assets/quotes/s3-belinda.png"><img src="assets/quotes/s3-belinda.png" alt="Belinda Sudano" loading="lazy"><div class="c-name">Belinda Sudano</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-diane.png"><img src="assets/quotes/s3-diane.png" alt="Diane Nicholls" loading="lazy"><div class="c-name">Diane Nicholls</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-tim.png"><img src="assets/quotes/s3-tim.png" alt="Tim Roache" loading="lazy"><div class="c-name">Tim Roache</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-vicki.png"><img src="assets/quotes/s3-vicki.png" alt="Dr Vicki Inglis" loading="lazy"><div class="c-name">Dr Vicki Inglis</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-steve.png"><img src="assets/quotes/s3-steve.png" alt="Steve Harland" loading="lazy"><div class="c-name">Steve Harland</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-cate.png"><img src="assets/quotes/s3-cate.png" alt="Cate Page" loading="lazy"><div class="c-name">Cate Page</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-belinda.png"><img src="assets/quotes/s3-belinda.png" alt="Belinda Sudano" loading="lazy"><div class="c-name">Belinda Sudano</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-diane.png"><img src="assets/quotes/s3-diane.png" alt="Diane Nicholls" loading="lazy"><div class="c-name">Diane Nicholls</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-tim.png"><img src="assets/quotes/s3-tim.png" alt="Tim Roache" loading="lazy"><div class="c-name">Tim Roache</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-vicki.png"><img src="assets/quotes/s3-vicki.png" alt="Dr Vicki Inglis" loading="lazy"><div class="c-name">Dr Vicki Inglis</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-steve.png"><img src="assets/quotes/s3-steve.png" alt="Steve Harland" loading="lazy"><div class="c-name">Steve Harland</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s3-cate.png"><img src="assets/quotes/s3-cate.png" alt="Cate Page" loading="lazy"><div class="c-name">Cate Page</div></div>
-        </div>
-      </div>
-    </div>
-
+    <div class="carousel-section fi"><div class="car-label">Voices of Season 3</div><div class="car-viewport"><div class="car-track" id="ct-s3" data-items="6">
+      <div class="car-item" data-full="assets/quotes/s3-belinda.png"><img src="assets/quotes/s3-belinda.png" alt="Belinda Sudano" loading="lazy"><div class="c-name">Belinda Sudano</div></div>
+      <div class="car-item" data-full="assets/quotes/s3-diane.png"><img src="assets/quotes/s3-diane.png" alt="Diane Nicholls" loading="lazy"><div class="c-name">Diane Nicholls</div></div>
+      <div class="car-item" data-full="assets/quotes/s3-tim.png"><img src="assets/quotes/s3-tim.png" alt="Tim Roache" loading="lazy"><div class="c-name">Tim Roache</div></div>
+      <div class="car-item" data-full="assets/quotes/s3-vicki.png"><img src="assets/quotes/s3-vicki.png" alt="Dr Vicki Inglis" loading="lazy"><div class="c-name">Dr Vicki Inglis</div></div>
+      <div class="car-item" data-full="assets/quotes/s3-steve.png"><img src="assets/quotes/s3-steve.png" alt="Steve Harland" loading="lazy"><div class="c-name">Steve Harland</div></div>
+      <div class="car-item" data-full="assets/quotes/s3-cate.png"><img src="assets/quotes/s3-cate.png" alt="Cate Page" loading="lazy"><div class="c-name">Cate Page</div></div>
+    </div></div></div>
     <div class="cloud-section fi">
-      <div class="cloud-label">Where the conversation went deep</div>
-      <div class="cloud-hint">Tap a word to hear its story</div>
+      <div class="cl-label">The moments that surfaced</div>
+      <div class="cl-hint">Tap a word to hear its story</div>
       <div class="cloud" id="cloud-s3">
-        <span class="cloud-word xl" data-quote="It's much easier to put out the spot fires as they're coming up, than wait till your house is burning down." data-speaker="Belinda Sudano">practice</span>
-        <span class="cloud-word lg" data-quote="The further you get down the continuum, it takes longer to pull yourself out, build yourself back up." data-speaker="Belinda Sudano">prevent</span>
-        <span class="cloud-word md" data-quote="The easiest place for you to improve your savings capacity is to gain a pay rise. And to bank it. But a lot of people are scared to ask." data-speaker="Steve Harland">savings</span>
-        <span class="cloud-word lg" data-quote="It's much easier to put out the spot fires as they're coming up, than wait till your house is burning down." data-speaker="Belinda Sudano">spot fires</span>
-        <span class="cloud-word md" data-quote="Doing hard things sometimes, you know, helps us when we face other challenges in life." data-speaker="Tim Roache">hard things</span>
-        <span class="cloud-word md" data-quote="We do have to be kind to ourselves." data-speaker="Dr Vicki Inglis">kind</span>
-        <span class="cloud-word lg" data-quote="I would say more of what I do is about the mental health side and emotional side, but what comes from that are really good physical results." data-speaker="Diane Nicholls">physical</span>
-        <span class="cloud-word sm" data-quote="I argue, Wayne, that we actually can't be objective about our own lives at any time." data-speaker="Cate Page">objective</span>
-        <span class="cloud-word sm" data-quote="A lot of people are scared to ask." data-speaker="Steve Harland">ask</span>
-        <span class="cloud-word md" data-quote="Our body gives us data all the time about where it's at. That little niggle is data." data-speaker="Belinda Sudano">tools</span>
-        <span class="cloud-word sm" data-quote="Have the audacity to say, I've just finished this three hour meeting, I need ten minutes to go outside." data-speaker="Belinda Sudano">continuum</span>
+        <span class="cw xl" style="left:40%;top:35%" data-quote="It's much easier to put out the spot fires as they're coming up, than wait till your house is burning down." data-speaker="Belinda Sudano">practice</span>
+        <span class="cw lg" style="left:72%;top:22%" data-quote="The further you get down the continuum, it takes longer to pull yourself out, build yourself back up." data-speaker="Belinda Sudano">prevent</span>
+        <span class="cw md" style="left:18%;top:20%" data-quote="The easiest place for you to improve your savings capacity is to gain a pay rise. And to bank it. But a lot of people are scared to ask." data-speaker="Steve Harland">savings</span>
+        <span class="cw lg" style="left:20%;top:50%" data-quote="It's much easier to put out the spot fires as they're coming up, than wait till your house is burning down." data-speaker="Belinda Sudano">spot fires</span>
+        <span class="cw md" style="left:65%;top:55%" data-quote="Doing hard things sometimes, you know, helps us when we face other challenges in life." data-speaker="Tim Roache">hard things</span>
+        <span class="cw md" style="left:50%;top:72%" data-quote="We do have to be kind to ourselves." data-speaker="Dr Vicki Inglis">kind</span>
+        <span class="cw lg" style="left:80%;top:42%" data-quote="I would say more of what I do is about the mental health side and emotional side, but what comes from that are really good physical results." data-speaker="Diane Nicholls">physical</span>
+        <span class="cw sm" style="left:85%;top:75%" data-quote="I argue, Wayne, that we actually can't be objective about our own lives at any time." data-speaker="Cate Page">objective</span>
+        <span class="cw sm" style="left:12%;top:78%" data-quote="A lot of people are scared to ask." data-speaker="Steve Harland">ask</span>
+        <span class="cw md" style="left:38%;top:15%" data-quote="Our body gives us data all the time about where it's at. That little niggle is data." data-speaker="Belinda Sudano">tools</span>
+        <span class="cw sm" style="left:58%;top:88%" data-quote="Have the audacity to say, I've just finished this three hour meeting, I need ten minutes to go outside." data-speaker="Belinda Sudano">continuum</span>
       </div>
-      <div class="cloud-reveal" id="reveal-s3"><div class="cloud-reveal-inner"><q></q><div class="speaker"></div></div></div>
+      <div class="cr" id="reveal-s3"><div class="cr-in"><q></q><div class="sp"></div></div></div>
     </div>
-
-    <div class="wayne-block fi">
-      <div class="wayne-ey">A question that cut through</div>
-      <q>So what's the smallest thing someone could do tomorrow that would actually make a difference?</q>
-      <div class="wayne-attr">— Wayne Schwass, Host</div>
-    </div>
+    <div class="wb fi"><div class="wb-ey">A question that cut through</div><q>So what's the smallest thing someone could do tomorrow that would actually make a difference?</q><div class="wb-a">— Wayne Schwass, Host</div></div>
   </div>
 </section>
 
-<!-- ═══ SEASON 4 ═══ -->
+<!-- ═══ S4 ═══ -->
+<div class="season-divider"><div class="sd-logo"><img src="assets/logo.png" alt=""></div></div>
 <section class="season-section" id="s4">
   <div class="season-container">
-    <div class="season-header fi">
-      <div class="sh-label">Season 4</div>
-      <h2 class="sh-title">Leadership as Practice</h2>
-      <div class="sh-meta">6 guests · The mirror turns to leaders</div>
-    </div>
+    <div class="season-header fi"><div class="sh-label">Season 4</div><h2 class="sh-title">Leadership as Practice</h2><div class="sh-meta">6 guests · The mirror turns to leaders</div></div>
     <p class="season-narrative fi">By Season 4, the conversation matured into something harder. It wasn't "be a better leader" — it was "the way you show up is already teaching your team what's allowed." Silence as a leadership act. Role-modelling as the real policy. The bravest move yet: asking leaders to see themselves.</p>
-
-    <div class="carousel-section fi">
-      <div class="carousel-label">Voices of Season 4</div>
-      <div class="carousel-viewport">
-        <div class="carousel-track" data-speed="37">
-          <div class="carousel-item" data-full="assets/quotes/s4-suzie.png"><img src="assets/quotes/s4-suzie.png" alt="Suzie Grey" loading="lazy"><div class="c-name">Suzie Grey</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-justin.png"><img src="assets/quotes/s4-justin.png" alt="Justin Austbo" loading="lazy"><div class="c-name">Justin Austbo</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-renee.png"><img src="assets/quotes/s4-renee.png" alt="Renee Milkop-Kerr" loading="lazy"><div class="c-name">Renee Milkop-Kerr</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-brent.png"><img src="assets/quotes/s4-brent.png" alt="Brent Fiecken" loading="lazy"><div class="c-name">Brent Fiecken</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-jorja.png"><img src="assets/quotes/s4-jorja.png" alt="Jorja Cleeland" loading="lazy"><div class="c-name">Jorja Cleeland</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-david.png"><img src="assets/quotes/s4-david.png" alt="David Breckenridge" loading="lazy"><div class="c-name">David Breckenridge</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-suzie.png"><img src="assets/quotes/s4-suzie.png" alt="Suzie Grey" loading="lazy"><div class="c-name">Suzie Grey</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-justin.png"><img src="assets/quotes/s4-justin.png" alt="Justin Austbo" loading="lazy"><div class="c-name">Justin Austbo</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-renee.png"><img src="assets/quotes/s4-renee.png" alt="Renee Milkop-Kerr" loading="lazy"><div class="c-name">Renee Milkop-Kerr</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-brent.png"><img src="assets/quotes/s4-brent.png" alt="Brent Fiecken" loading="lazy"><div class="c-name">Brent Fiecken</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-jorja.png"><img src="assets/quotes/s4-jorja.png" alt="Jorja Cleeland" loading="lazy"><div class="c-name">Jorja Cleeland</div></div>
-          <div class="carousel-item" data-full="assets/quotes/s4-david.png"><img src="assets/quotes/s4-david.png" alt="David Breckenridge" loading="lazy"><div class="c-name">David Breckenridge</div></div>
-        </div>
-      </div>
-    </div>
-
+    <div class="carousel-section fi"><div class="car-label">Voices of Season 4</div><div class="car-viewport"><div class="car-track" id="ct-s4" data-items="6">
+      <div class="car-item" data-full="assets/quotes/s4-suzie.png"><img src="assets/quotes/s4-suzie.png" alt="Suzie Grey" loading="lazy"><div class="c-name">Suzie Grey</div></div>
+      <div class="car-item" data-full="assets/quotes/s4-justin.png"><img src="assets/quotes/s4-justin.png" alt="Justin Austbo" loading="lazy"><div class="c-name">Justin Austbo</div></div>
+      <div class="car-item" data-full="assets/quotes/s4-renee.png"><img src="assets/quotes/s4-renee.png" alt="Renee Milkop-Kerr" loading="lazy"><div class="c-name">Renee Milkop-Kerr</div></div>
+      <div class="car-item" data-full="assets/quotes/s4-brent.png"><img src="assets/quotes/s4-brent.png" alt="Brent Fiecken" loading="lazy"><div class="c-name">Brent Fiecken</div></div>
+      <div class="car-item" data-full="assets/quotes/s4-jorja.png"><img src="assets/quotes/s4-jorja.png" alt="Jorja Cleeland" loading="lazy"><div class="c-name">Jorja Cleeland</div></div>
+      <div class="car-item" data-full="assets/quotes/s4-david.png"><img src="assets/quotes/s4-david.png" alt="David Breckenridge" loading="lazy"><div class="c-name">David Breckenridge</div></div>
+    </div></div></div>
     <div class="cloud-section fi">
-      <div class="cloud-label">Where the conversation went deep</div>
-      <div class="cloud-hint">Tap a word to hear its story</div>
+      <div class="cl-label">The moments that surfaced</div>
+      <div class="cl-hint">Tap a word to hear its story</div>
       <div class="cloud" id="cloud-s4">
-        <span class="cloud-word xl" data-quote="People watch to see what you're doing. And people look for role models. You are telling me to go home at a certain time — but you are still working really late." data-speaker="Suzie Grey">role model</span>
-        <span class="cloud-word lg" data-quote="Credibility comes through continuing to learn and adapt. Earning trust is about continuing to show up, delivering on promises and being pragmatic." data-speaker="Justin Austbo">trust</span>
-        <span class="cloud-word md" data-quote="Credibility comes through continuing to learn and adapt." data-speaker="Justin Austbo">adapt</span>
-        <span class="cloud-word lg" data-quote="As leaders we forget that our behaviours actually show other people how they need to show up. You are setting the example that everybody else should show up as." data-speaker="Renee Milkop-Kerr">behaviour</span>
-        <span class="cloud-word md" data-quote="Quite often the most powerful thing to do as a leader is to not speak at all." data-speaker="David Breckenridge">silence</span>
-        <span class="cloud-word sm" data-quote="You spend more time keeping the walls of the box up than dealing with the issue." data-speaker="Brent Fiecken">freedom</span>
-        <span class="cloud-word sm" data-quote="You spend more time keeping the walls of the box up than dealing with the issue. If you've got the freedom to deal with the issue, you can turn to a positive approach." data-speaker="Brent Fiecken">box</span>
-        <span class="cloud-word md" data-quote="Credibility comes through continuing to learn and adapt." data-speaker="Justin Austbo">learn</span>
-        <span class="cloud-word sm" data-quote="It comes back to being right — and it's a silly way to live." data-speaker="Jorja Cleeland">right</span>
-        <span class="cloud-word lg" data-quote="You are setting the example that everybody else should show up as." data-speaker="Renee Milkop-Kerr">example</span>
-        <span class="cloud-word md" data-quote="Every leader, every single leader needs someone to show the mirror to them." data-speaker="Suzie Grey">mirror</span>
-        <span class="cloud-word md" data-quote="The way you show up is already teaching your team what's allowed." data-speaker="Suzie Grey">show up</span>
+        <span class="cw xl" style="left:35%;top:38%" data-quote="People watch to see what you're doing. And people look for role models. You are telling me to go home at a certain time — but you are still working really late." data-speaker="Suzie Grey">role model</span>
+        <span class="cw lg" style="left:70%;top:25%" data-quote="Credibility comes through continuing to learn and adapt. Earning trust is about continuing to show up, delivering on promises and being pragmatic." data-speaker="Justin Austbo">trust</span>
+        <span class="cw md" style="left:15%;top:22%" data-quote="Credibility comes through continuing to learn and adapt." data-speaker="Justin Austbo">adapt</span>
+        <span class="cw lg" style="left:18%;top:55%" data-quote="As leaders we forget that our behaviours actually show other people how they need to show up. You are setting the example that everybody else should show up as." data-speaker="Renee Milkop-Kerr">behaviour</span>
+        <span class="cw md" style="left:62%;top:58%" data-quote="Quite often the most powerful thing to do as a leader is to not speak at all." data-speaker="David Breckenridge">silence</span>
+        <span class="cw sm" style="left:82%;top:70%" data-quote="You spend more time keeping the walls of the box up than dealing with the issue." data-speaker="Brent Fiecken">freedom</span>
+        <span class="cw sm" style="left:48%;top:80%" data-quote="You spend more time keeping the walls of the box up than dealing with the issue. If you've got the freedom to deal with the issue, you can turn to a positive approach." data-speaker="Brent Fiecken">box</span>
+        <span class="cw md" style="left:80%;top:45%" data-quote="Credibility comes through continuing to learn and adapt." data-speaker="Justin Austbo">learn</span>
+        <span class="cw sm" style="left:12%;top:80%" data-quote="It comes back to being right — and it's a silly way to live." data-speaker="Jorja Cleeland">right</span>
+        <span class="cw lg" style="left:55%;top:15%" data-quote="You are setting the example that everybody else should show up as." data-speaker="Renee Milkop-Kerr">example</span>
+        <span class="cw md" style="left:30%;top:70%" data-quote="Every leader, every single leader needs someone to show the mirror to them." data-speaker="Suzie Grey">mirror</span>
+        <span class="cw md" style="left:50%;top:45%" data-quote="The way you show up is already teaching your team what's allowed." data-speaker="Suzie Grey">show up</span>
       </div>
-      <div class="cloud-reveal" id="reveal-s4"><div class="cloud-reveal-inner"><q></q><div class="speaker"></div></div></div>
+      <div class="cr" id="reveal-s4"><div class="cr-in"><q></q><div class="sp"></div></div></div>
     </div>
-
-    <div class="wayne-block fi">
-      <div class="wayne-ey">A question that cut through</div>
-      <q>If your team watched you this week — what would they say you were really telling them was okay?</q>
-      <div class="wayne-attr">— Wayne Schwass, Host</div>
-    </div>
+    <div class="wb fi"><div class="wb-ey">A question that cut through</div><q>If your team watched you this week — what would they say you were really telling them was okay?</q><div class="wb-a">— Wayne Schwass, Host</div></div>
   </div>
 </section>
 
 <!-- ═══ POSSIBILITIES ═══ -->
-<section class="possibilities">
+<section class="poss">
   <div class="container">
-    <img class="poss-icon fi" src="assets/logo.png" alt="">
     <h2 class="poss-title fi">This could become a living resource</h2>
-    <p class="poss-body fi">This page captures the heart of what Healthy Minds has built over four seasons. If it's useful, it can be enhanced into something your team can explore — a place to listen, watch, and find the moments that connect most to them.</p>
-    <div class="poss-features fi">
-      <span class="poss-tag">Listen to full episodes</span>
-      <span class="poss-tag">Watch video highlights</span>
-      <span class="poss-tag">Search across all conversations</span>
-      <span class="poss-tag">Share via internal comms</span>
-      <span class="poss-tag">Mobile-friendly for the whole team</span>
+    <p class="poss-body fi">What you've built over four seasons is worth more than a back catalogue. If it's useful, this page can be enhanced into something your whole team can explore — a place to listen, watch, and find the moments that connect most to them.</p>
+    <div class="poss-tags fi">
+      <span class="poss-tag">Full audio episodes</span>
+      <span class="poss-tag">Video highlights</span>
+      <span class="poss-tag">Searchable transcripts</span>
+      <span class="poss-tag">Internal comms ready</span>
     </div>
   </div>
 </section>
@@ -705,141 +444,103 @@
 <!-- ═══ OUTRO ═══ -->
 <section class="outro">
   <img class="outro-logo" src="assets/logo.png" alt="">
-  <h2>Four seasons in, the conversation isn't winding down. It's opening up.</h2>
-  <p>What started as breaking the silence has become a practice — one the business keeps getting better at, one episode at a time.</p>
-  <div class="mark">Healthy Minds · A Fonterra Podcast · Produced by VidPod</div>
+  <p>Built with care by <strong>VidPod</strong> — proud to be part of this conversation since day one.</p>
+  <div class="mark">Healthy Minds · A Fonterra Podcast</div>
 </section>
 
 <!-- ═══ LIGHTBOX ═══ -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close">&times;</button>
-  <img src="" alt="">
-</div>
+<div class="lb" id="lb"><button class="lb-x">&times;</button><img src="" alt=""></div>
 
 <script>
 (function(){
-  // ── INTRO: hold then leave ──
-  const intro = document.getElementById('intro');
-  setTimeout(() => { intro.classList.add('leaving'); }, 3800);
-  setTimeout(() => { intro.style.display = 'none'; }, 4600);
 
-  // ── FADE-IN on scroll ──
-  const fiEls = document.querySelectorAll('.fi');
-  const fiObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); fiObs.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-  fiEls.forEach(el => fiObs.observe(el));
+  /* ── INTRO ── */
+  const intro=document.getElementById('intro');
+  setTimeout(()=>intro.classList.add('leaving'),3200);
+  setTimeout(()=>{intro.style.display='none'},4200);
 
-  // ── COUNTING STATS ──
-  const statNums = document.querySelectorAll('.stat-num[data-count]');
-  const countObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting || e.target.dataset.noanim !== undefined) return;
-      const target = parseInt(e.target.dataset.count);
-      const duration = target > 100 ? 1800 : 1200;
-      const start = performance.now();
-      const el = e.target;
-      countObs.unobserve(el);
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(eased * target);
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
+  /* ── FADE-IN ── */
+  const fiObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');fiObs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.fi').forEach(el=>fiObs.observe(el));
+
+  /* ── COUNTING STATS ── */
+  let statsDone=false;
+  const statsObs=new IntersectionObserver(es=>{es.forEach(e=>{
+    if(!e.isIntersecting||statsDone)return;statsDone=true;
+    document.querySelectorAll('.stat-num[data-count]').forEach(el=>{
+      if(el.dataset.static!==undefined)return;
+      const target=parseInt(el.dataset.count),dur=target>100?2000:1200,t0=performance.now();
+      (function tick(now){
+        const p=Math.min((now-t0)/dur,1),eased=1-Math.pow(1-p,3);
+        el.textContent=Math.round(eased*target);
+        if(p<1)requestAnimationFrame(tick);
+      })(t0);
     });
-  }, { threshold: 0.5 });
-  statNums.forEach(el => countObs.observe(el));
+  })},{threshold:0.3});
+  const heroEl=document.querySelector('.stats');
+  if(heroEl)statsObs.observe(heroEl);
 
-  // ── NAV ──
-  const navBtns = document.querySelectorAll('.nav-btn');
-  navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const t = document.getElementById(btn.dataset.target);
-      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
-      navBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
+  /* ── BACK TO TOP ── */
+  const btt=document.getElementById('btt');
+  window.addEventListener('scroll',()=>{btt.classList.toggle('show',window.scrollY>600)},{passive:true});
+  btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-  // Auto-highlight nav
-  const sIds = ['journey','s1','s2','s3','s4'];
-  const navObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navBtns.forEach(b => b.classList.toggle('active', b.dataset.target === e.target.id));
-      }
-    });
-  }, { threshold: 0.25, rootMargin: '-56px 0px -40% 0px' });
-  sIds.forEach(id => { const el = document.getElementById(id); if (el) navObs.observe(el); });
-
-  // ── JOURNEY TIMELINE clicks ──
-  document.querySelectorAll('.tl-stop').forEach(stop => {
-    stop.addEventListener('click', () => {
-      const t = document.getElementById(stop.dataset.target);
-      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
-    });
-  });
-
-  // ── PATH TRACKER ──
-  const tracker = document.getElementById('pathTracker');
-  const pathFill = document.getElementById('pathFill');
-  const pathDots = document.querySelectorAll('.path-dot');
-  const seasonEls = ['s1','s2','s3','s4'].map(id => document.getElementById(id));
-
-  function updatePath() {
-    const scrollY = window.scrollY;
-    const wh = window.innerHeight;
-    const firstTop = seasonEls[0] ? seasonEls[0].offsetTop : 0;
-    const lastBottom = seasonEls[3] ? seasonEls[3].offsetTop + seasonEls[3].offsetHeight : 0;
-    const inRange = scrollY + wh / 2 > firstTop - 200 && scrollY < lastBottom + 200;
-    tracker.classList.toggle('visible', inRange);
-
-    if (inRange) {
-      const progress = Math.max(0, Math.min(1, (scrollY + wh / 2 - firstTop) / (lastBottom - firstTop)));
-      pathFill.style.height = (progress * 100) + '%';
-      pathDots.forEach((dot, i) => {
-        const secTop = seasonEls[i].offsetTop;
-        const secMid = secTop + seasonEls[i].offsetHeight / 2;
-        dot.classList.toggle('active', scrollY + wh / 2 > secTop && scrollY + wh / 2 < secMid + seasonEls[i].offsetHeight / 2);
-      });
+  /* ── JOURNEY TIMELINE ANIMATION ── */
+  const tlStops=document.querySelectorAll('.tl-stop');
+  const tlFill=document.getElementById('tlFill');
+  const tlObs=new IntersectionObserver(es=>{es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('active');
+      // Update fill line
+      const idx=parseInt(e.target.dataset.idx);
+      const pct=((idx+1)/tlStops.length)*100;
+      tlFill.style.height=Math.max(parseFloat(tlFill.style.height||0),pct)+'%';
     }
-  }
-  window.addEventListener('scroll', updatePath, { passive: true });
+  })},{threshold:0.4,rootMargin:'0px 0px -10% 0px'});
+  tlStops.forEach(s=>tlObs.observe(s));
 
-  // ── LIGHTBOX ──
-  const lb = document.getElementById('lightbox');
-  const lbImg = lb.querySelector('img');
-  document.querySelectorAll('.carousel-item').forEach(item => {
-    item.addEventListener('click', () => {
-      lbImg.src = item.dataset.full;
-      lbImg.alt = item.querySelector('.c-name')?.textContent || '';
-      lb.classList.add('active');
-    });
-  });
-  lb.addEventListener('click', () => { lb.classList.remove('active'); });
-
-  // ── WORD CLOUD ──
-  document.querySelectorAll('.cloud-word').forEach(word => {
-    word.addEventListener('click', () => {
-      const cloud = word.closest('.cloud');
-      const section = cloud.closest('.cloud-section');
-      const reveal = section.querySelector('.cloud-reveal');
-      const qEl = reveal.querySelector('q');
-      const spEl = reveal.querySelector('.speaker');
-
-      if (word.classList.contains('active')) {
-        word.classList.remove('active');
-        reveal.classList.remove('active');
-        return;
+  /* ── CAROUSEL (JS requestAnimationFrame) ── */
+  document.querySelectorAll('.car-track').forEach(track=>{
+    const items=Array.from(track.children);
+    const count=parseInt(track.dataset.items)||items.length;
+    // Clone items for seamless loop
+    items.forEach(item=>{const c=item.cloneNode(true);track.appendChild(c)});
+    let pos=0;const speed=0.5;let paused=false;
+    function step(){
+      if(!paused){
+        pos-=speed;
+        const halfWidth=track.scrollWidth/2;
+        if(Math.abs(pos)>=halfWidth)pos=0;
+        track.style.transform='translateX('+pos+'px)';
       }
-      cloud.querySelectorAll('.cloud-word').forEach(w => w.classList.remove('active'));
-      word.classList.add('active');
-      qEl.textContent = word.dataset.quote;
-      spEl.textContent = '— ' + word.dataset.speaker;
-      reveal.classList.add('active');
-    });
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    track.addEventListener('mouseenter',()=>paused=true);
+    track.addEventListener('mouseleave',()=>paused=false);
+    track.addEventListener('touchstart',()=>paused=true,{passive:true});
+    track.addEventListener('touchend',()=>{setTimeout(()=>paused=false,2000)});
   });
+
+  /* ── LIGHTBOX ── */
+  const lb=document.getElementById('lb'),lbImg=lb.querySelector('img');
+  document.addEventListener('click',e=>{
+    const item=e.target.closest('.car-item');
+    if(item){lbImg.src=item.dataset.full;lbImg.alt=item.querySelector('.c-name')?.textContent||'';lb.classList.add('on')}
+  });
+  lb.addEventListener('click',()=>lb.classList.remove('on'));
+
+  /* ── WORD CLOUD ── */
+  document.addEventListener('click',e=>{
+    const w=e.target.closest('.cw');
+    if(!w)return;
+    const cloud=w.closest('.cloud'),section=cloud.closest('.cloud-section');
+    const reveal=section.querySelector('.cr'),qEl=reveal.querySelector('q'),spEl=reveal.querySelector('.sp');
+    if(w.classList.contains('on')){w.classList.remove('on');reveal.classList.remove('on');return}
+    cloud.querySelectorAll('.cw').forEach(x=>x.classList.remove('on'));
+    w.classList.add('on');qEl.textContent=w.dataset.quote;spEl.textContent='— '+w.dataset.speaker;reveal.classList.add('on');
+  });
+
 })();
 </script>
 </body>

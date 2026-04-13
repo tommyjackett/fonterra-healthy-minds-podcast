@@ -168,7 +168,11 @@
   .cl-hint{font-size:clamp(14px,2.2vw,16px);color:var(--ink-soft);margin-bottom:20px;text-align:center}
   .cloud{
     position:relative;width:100%;height:clamp(340px,65vw,460px);
-    background:url('assets/bg-texture.png') center/cover no-repeat;
+    background:
+      radial-gradient(ellipse 80% 60% at 25% 35%, rgba(200,225,240,0.7) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 50% at 75% 60%, rgba(190,220,235,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 70% at 50% 50%, rgba(210,230,242,0.5) 0%, transparent 80%),
+      linear-gradient(160deg, #dceef6 0%, #e8f2f8 40%, #d4e8f2 70%, #dff0f7 100%);
     border-radius:16px;
     padding:24px;overflow:hidden;
     box-shadow:0 6px 28px rgba(28,44,83,0.12);
@@ -189,7 +193,7 @@
   .cw.lg{font-size:clamp(21px,3.8vw,28px)}
   .cw.md{font-size:clamp(17px,3vw,22px)}
   .cw.sm{font-size:clamp(14px,2.5vw,17px);font-weight:600}
-  .cw.c-green{color:var(--green) !important}
+  .cw.c-green{color:#4a9e1e !important;text-shadow:0 1px 3px rgba(0,0,0,0.4),0 0 6px rgba(0,0,0,0.15) !important}
   .cw.c-blue{color:var(--blue) !important}
 
   .cr{max-height:0;overflow:hidden;transition:max-height 0.4s,opacity 0.3s;opacity:0;max-width:600px;width:100%}

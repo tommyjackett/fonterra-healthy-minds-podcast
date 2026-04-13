@@ -168,11 +168,7 @@
   .cl-hint{font-size:clamp(14px,2.2vw,16px);color:var(--ink-soft);margin-bottom:20px;text-align:center}
   .cloud{
     position:relative;width:100%;height:clamp(340px,65vw,460px);
-    background:
-      radial-gradient(ellipse 80% 60% at 25% 35%, rgba(200,225,240,0.7) 0%, transparent 70%),
-      radial-gradient(ellipse 70% 50% at 75% 60%, rgba(190,220,235,0.6) 0%, transparent 70%),
-      radial-gradient(ellipse 90% 70% at 50% 50%, rgba(210,230,242,0.5) 0%, transparent 80%),
-      linear-gradient(160deg, #dceef6 0%, #e8f2f8 40%, #d4e8f2 70%, #dff0f7 100%);
+    background:url('assets/bg-texture.png') center/cover no-repeat;
     border-radius:16px;
     padding:24px;overflow:hidden;
     box-shadow:0 6px 28px rgba(28,44,83,0.12);
@@ -552,13 +548,13 @@
     w.classList.add(Math.random()>0.5?'c-blue':'c-green');
   });
   setInterval(()=>{
-    for(let i=0;i<4;i++){
+    for(let i=0;i<5;i++){
       const idx=Math.floor(Math.random()*allCW.length);
       const w=allCW[idx];
       if(w.classList.contains('on'))continue;
       w.classList.toggle('c-blue');w.classList.toggle('c-green');
     }
-  },500);
+  },400);
 
   /* ── WORD CLOUD ── */
   document.addEventListener('click',e=>{

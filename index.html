@@ -161,7 +161,7 @@
   /* ── Word Cloud ── */
   .cloud-section{margin-bottom:48px;display:flex;flex-direction:column;align-items:stretch;text-align:center}
   .cl-label{font-size:clamp(15px,2.5vw,18px);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;text-align:center}
-  .cl-hint{font-size:clamp(14px,2.2vw,16px);color:var(--ink-soft);margin-bottom:20px;text-align:center}
+  .cl-hint{font-size:clamp(15px,2.5vw,17px);color:var(--blue);font-weight:600;margin-bottom:20px;text-align:center;opacity:0.7}
   .cloud{
     position:relative;z-index:1;width:100%;height:clamp(340px,65vw,460px);
     background:url('assets/bg-texture.png') center/cover no-repeat;
@@ -598,6 +598,7 @@
   },400);
 
   /* ── WORD CLOUD ── */
+  const scrolledClouds=new Set();
   document.addEventListener('click',e=>{
     const w=e.target.closest('.cw');
     if(!w)return;
@@ -606,7 +607,35 @@
     if(w.classList.contains('on')){w.classList.remove('on');reveal.classList.remove('on');return}
     cloud.querySelectorAll('.cw').forEach(x=>x.classList.remove('on'));
     w.classList.add('on');qEl.textContent=w.dataset.quote;spEl.textContent='— '+w.dataset.speaker;reveal.classList.add('on');
-    setTimeout(()=>{const label=section.querySelector('.cl-label');if(label){label.scrollIntoView({behavior:'smooth',block:'start'})}else{reveal.scrollIntoView({behavior:'smooth',block:'start'})}},100);
+    const cloudId=cloud.id;
+    if(!scrolledClouds.has(cloudId)){
+      scrolledClouds.add(cloudId);
+      setTimeout(()=>{const label=section.querySelector('.cl-label');if(label){label.scrollIntoView({behavior:'smooth',block:'start'})}else{reveal.scrollIntoView({behavior:'smooth',block:'start'})}},100);
+    }
+  });
+
+  /* ── WORD CLOUD — auto-demo: pulse the first xl word in each cloud after it appears ── */
+  document.querySelectorAll('.cloud').forEach(cloud=>{
+    const demoObs=new IntersectionObserver(es=>{es.forEach(e=>{
+      if(e.isIntersecting){
+        demoObs.unobserve(cloud);
+        const firstWord=cloud.querySelector('.cw.xl')||cloud.querySelector('.cw.lg');
+        if(firstWord){
+          setTimeout(()=>{
+            firstWord.style.transition='transform 0.3s,box-shadow 0.3s';
+            firstWord.style.transform='translate(-50%,-50%) scale(1.2)';
+            firstWord.style.boxShadow='0 0 16px rgba(114,191,68,0.4)';
+            setTimeout(()=>{firstWord.style.transform='';firstWord.style.boxShadow=''},600);
+            setTimeout(()=>{
+              firstWord.style.transform='translate(-50%,-50%) scale(1.15)';
+              firstWord.style.boxShadow='0 0 12px rgba(114,191,68,0.3)';
+              setTimeout(()=>{firstWord.style.transform='';firstWord.style.boxShadow=''},500);
+            },1000);
+          },800);
+        }
+      }
+    })},{threshold:0.3});
+    demoObs.observe(cloud);
   });
 
 })();

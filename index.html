@@ -544,12 +544,33 @@
     track.addEventListener('mouseleave',()=>paused=false);
     track.addEventListener('touchstart',()=>paused=true,{passive:true});
     track.addEventListener('touchend',()=>{setTimeout(()=>paused=false,2000)});
-    // Arrow buttons
+    // Arrow buttons — smooth scroll like a finger swipe
     const section=track.closest('.carousel-section');
     const prevBtn=section.querySelector('.car-prev');
     const nextBtn=section.querySelector('.car-next');
-    if(prevBtn)prevBtn.addEventListener('click',()=>{pos+=itemW;const hw=track.scrollWidth/2;if(pos>0)pos=-hw+pos;track.style.transform='translateX('+pos+'px)'});
-    if(nextBtn)nextBtn.addEventListener('click',()=>{pos-=itemW;const hw=track.scrollWidth/2;if(Math.abs(pos)>=hw)pos=0;track.style.transform='translateX('+pos+'px)'});
+    function smoothScroll(distance){
+      paused=true;
+      const start=pos;
+      const target=start+distance;
+      const duration=400;
+      let startTime=null;
+      function animate(time){
+        if(!startTime)startTime=time;
+        const elapsed=time-startTime;
+        const progress=Math.min(elapsed/duration,1);
+        const ease=progress<0.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
+        pos=start+(target-start)*ease;
+        const hw=track.scrollWidth/2;
+        if(pos>0)pos-=hw;
+        if(Math.abs(pos)>=hw)pos+=hw;
+        track.style.transform='translateX('+pos+'px)';
+        if(progress<1){requestAnimationFrame(animate)}
+        else{setTimeout(()=>paused=false,300)}
+      }
+      requestAnimationFrame(animate);
+    }
+    if(prevBtn)prevBtn.addEventListener('click',()=>smoothScroll(itemW));
+    if(nextBtn)nextBtn.addEventListener('click',()=>smoothScroll(-itemW));
   });
 
   /* ── LIGHTBOX ── */

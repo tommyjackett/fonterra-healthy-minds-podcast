@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Minds — Four Seasons, One Conversation</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #09426B;
+    --blue-deep: #06304F;
+    --purple: #62279B;
+    --purple-soft: #8B5EC4;
+    --cream: #FBF8F3;
+    --cream-warm: #F4EEE2;
+    --ink: #1A1A1A;
+    --ink-soft: #4A4A4A;
+    --line: rgba(9, 66, 107, 0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Fraunces', serif; font-weight: 500; letter-spacing: -0.02em; }
+
+  /* ───── HERO ───── */
+  .hero {
+    min-height: 92vh;
+    background: linear-gradient(160deg, var(--blue) 0%, var(--blue-deep) 60%, var(--purple) 120%);
+    color: var(--cream);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(98,39,155,0.35) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 32px;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 7vw, 96px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    max-width: 1100px;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--purple-soft);
+  }
+  .hero-sub {
+    font-size: clamp(17px, 1.5vw, 21px);
+    max-width: 680px;
+    opacity: 0.85;
+    line-height: 1.55;
+    margin-bottom: 64px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(251,248,243,0.2);
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* ───── STICKY NAV ───── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-btn {
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--blue);
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+  .nav-btn:hover {
+    background: var(--blue);
+    color: var(--cream);
+    border-color: var(--blue);
+  }
+  .nav-btn.active {
+    background: var(--purple);
+    color: var(--cream);
+    border-color: var(--purple);
+  }
+
+  /* ───── SECTIONS ───── */
+  section { padding: 100px 40px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--blue);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .section-lede {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 680px;
+    line-height: 1.55;
+    margin-bottom: 60px;
+  }
+
+  /* ───── JOURNEY SNAKE ───── */
+  .journey {
+    background: var(--cream-warm);
+    position: relative;
+  }
+  .snake {
+    position: relative;
+    max-width: 1100px;
+    margin: 60px auto 0;
+  }
+  .snake::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--purple));
+    transform: translateX(-50%);
+    opacity: 0.3;
+  }
+  .snake-step {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 80px;
+    position: relative;
+  }
+  .snake-step:last-child { margin-bottom: 0; }
+  .snake-label .num {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--purple);
+    opacity: 0.4;
+    display: block;
+  }
+  .snake-label h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--blue);
+    line-height: 1.1;
+    margin-top: 8px;
+    letter-spacing: -0.02em;
+  }
+  .snake-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 3px solid var(--purple);
+    z-index: 2;
+    position: relative;
+  }
+  .snake-copy {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .snake-copy .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 10px;
+  }
+  .snake-step.right .snake-label { text-align: right; order: 3; }
+  .snake-step.right .snake-copy { order: 1; text-align: right; }
+  .snake-step.right .snake-dot { order: 2; }
+  .snake-step.left .snake-label { order: 1; }
+  .snake-step.left .snake-dot { order: 2; }
+  .snake-step.left .snake-copy { order: 3; }
+
+  /* ───── SEASON DEEP DIVES ───── */
+  .deep { background: var(--cream); }
+  .season-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .season-card.open { box-shadow: 0 20px 60px rgba(9,66,107,0.08); }
+  .season-head {
+    padding: 36px 40px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .season-head:hover { background: var(--cream-warm); }
+  .season-num {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--purple);
+    line-height: 1;
+    min-width: 80px;
+  }
+  .season-head-main h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .season-head-main p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+  .season-toggle {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--cream);
+    color: var(--blue);
+    font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .season-card.open .season-toggle {
+    background: var(--purple);
+    color: var(--cream);
+    border-color: var(--purple);
+    transform: rotate(45deg);
+  }
+  .season-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .season-card.open .season-body { max-height: 6000px; }
+  .season-body-inner {
+    padding: 40px 40px 48px 40px;
+    border-top: 1px solid var(--line);
+  }
+  .season-narrative {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 760px;
+    margin-bottom: 48px;
+    letter-spacing: -0.01em;
+  }
+  .season-narrative::first-letter {
+    font-size: 64px;
+    float: left;
+    line-height: 0.85;
+    padding: 6px 10px 0 0;
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  .block-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--blue);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Wayne question block */
+  .wayne-block {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+    color: var(--cream);
+    border-radius: 6px;
+    padding: 44px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wayne-block::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(98,39,155,0.4) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .wayne-block .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .wayne-block q {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.4;
+    font-style: italic;
+    display: block;
+    max-width: 720px;
+    quotes: "\201C" "\201D";
+    position: relative;
+    z-index: 2;
+  }
+  .wayne-block .attr {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 20px;
+  }
+
+  /* Quotes dropdown */
+  .quotes-block { margin-bottom: 48px; }
+  .quotes-toggle {
+    background: none;
+    border: 1.5px solid var(--purple);
+    color: var(--purple);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quotes-toggle:hover { background: var(--purple); color: var(--cream); }
+  .quotes-toggle .arrow { transition: transform 0.3s; }
+  .quotes-block.open .quotes-toggle .arrow { transform: rotate(180deg); }
+  .quotes-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+    margin-top: 0;
+  }
+  .quotes-block.open .quotes-list {
+    max-height: 5000px;
+    margin-top: 32px;
+  }
+  .quote-card {
+    border-left: 3px solid var(--purple);
+    padding: 20px 0 20px 28px;
+    margin-bottom: 28px;
+  }
+  .quote-card:last-child { margin-bottom: 0; }
+  .quote-card q {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 12px;
+    quotes: "\201C" "\201D";
+  }
+  .quote-card .who {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple);
+  }
+
+  /* Word cloud — actual cloud shape */
+  .cloud-block { margin-bottom: 20px; }
+  .cloud {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    height: 320px;
+    margin: 20px 0 0;
+    background: radial-gradient(ellipse at center, rgba(98,39,155,0.06) 0%, transparent 70%);
+    border-radius: 50% / 60%;
+  }
+  .cloud span {
+    position: absolute;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--blue);
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+  }
+  .cloud span.alt { color: var(--purple); }
+  .cloud span.light { font-weight: 400; opacity: 0.7; }
+
+  /* ───── OUTRO ───── */
+  .outro {
+    background: var(--blue);
+    color: var(--cream);
+    padding: 100px 40px;
+    text-align: center;
+  }
+  .outro h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 760px;
+    margin: 0 auto 24px;
+    letter-spacing: -0.02em;
+  }
+  .outro p {
+    font-size: 17px;
+    opacity: 0.8;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .outro .mark {
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 820px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .snake::before { left: 30px; }
+    .snake-step { grid-template-columns: 20px 1fr; gap: 24px; }
+    .snake-step.right .snake-label,
+    .snake-step.left .snake-label,
+    .snake-step.right .snake-copy,
+    .snake-step.left .snake-copy { text-align: left; order: unset; }
+    .snake-step.right .snake-dot,
+    .snake-step.left .snake-dot { order: unset; }
+    .snake-label { grid-column: 2; }
+    .snake-dot { grid-column: 1; grid-row: 1; }
+    .snake-copy { grid-column: 2; margin-top: 16px; }
+    .season-head { grid-template-columns: auto 1fr auto; padding: 28px 24px; gap: 20px; }
+    .season-num { font-size: 36px; min-width: 56px; }
+    .season-head-main h4 { font-size: 20px; }
+    .season-body-inner { padding: 32px 24px; }
+    .wayne-block { padding: 32px 24px; }
+    .wayne-block q { font-size: 20px; }
+    section { padding: 70px 24px; }
+    .hero { padding: 60px 24px 40px; }
+    .cloud { height: 240px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Healthy Minds · A Fonterra Podcast</div>
+    <h1 class="hero-title">Four seasons.<br>One conversation<br>that keeps <em>getting braver.</em></h1>
+    <p class="hero-sub">A look back at how Fonterra's mental health podcast has evolved — from breaking the silence to rebuilding identity to leadership as daily practice. Twenty-four conversations. One continuing story.</p>
+    <div class="stats">
+      <div><div class="stat-num">24</div><div class="stat-label">Episodes Recorded</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">Seasons</div></div>
+      <div><div class="stat-num">2022</div><div class="stat-label">Launched</div></div>
+      <div><div class="stat-num">860</div><div class="stat-label">Minutes Created</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ STICKY NAV ═══ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn" data-target="journey">The Journey</button>
+    <button class="nav-btn" data-target="s1">S1 · Break the Silence</button>
+    <button class="nav-btn" data-target="s2">S2 · Identity &amp; Rebuilding</button>
+    <button class="nav-btn" data-target="s3">S3 · Tools &amp; Prevention</button>
+    <button class="nav-btn" data-target="s4">S4 · Leadership as Practice</button>
+  </div>
+</nav>
+
+<!-- ═══ JOURNEY SNAKE ═══ -->
+<section class="journey" id="journey">
+  <div class="container">
+    <div class="section-eyebrow">Journey at a glance</div>
+    <h2 class="section-title">The shape of<br>four seasons.</h2>
+    <p class="section-lede">Each season has a distinct centre of gravity. Read together, they tell a story about what changes when a workplace keeps showing up to the same conversation — and dares to go deeper every time.</p>
+
+    <div class="snake">
+      <div class="snake-step left">
+        <div class="snake-label"><span class="num">01</span><h3>Break the<br>Silence</h3></div>
+        <div class="snake-dot"></div>
+        <div class="snake-copy">
+          <div class="tag">Season 1 · 2022</div>
+          The first brave step. Fonterra people sharing lived experience for the first time — loss, burnout, identity, the quiet weight of not being okay. The prevailing message: it's okay to not be okay, and it's okay to say it out loud.
+        </div>
+      </div>
+
+      <div class="snake-step right">
+        <div class="snake-label"><span class="num">02</span><h3>Identity &amp;<br>Rebuilding</h3></div>
+        <div class="snake-dot"></div>
+        <div class="snake-copy">
+          <div class="tag">Season 2</div>
+          Moving from disclosure to reconstruction. Guests wrestle with who they are outside the roles they've built — fatherhood after suicide loss, the work-home split, the work of coming back. Stories get messier and more honest.
+        </div>
+      </div>
+
+      <div class="snake-step left">
+        <div class="snake-label"><span class="num">03</span><h3>Tools &amp;<br>Prevention</h3></div>
+        <div class="snake-dot"></div>
+        <div class="snake-copy">
+          <div class="tag">Season 3</div>
+          The pivot from "tell your story" to "here's what actually helps." Financial stress, physical health, stoicism, kindness to self. Guests bring frameworks and practice, not just experience.
+        </div>
+      </div>
+
+      <div class="snake-step right">
+        <div class="snake-label"><span class="num">04</span><h3>Leadership<br>as Practice</h3></div>
+        <div class="snake-dot"></div>
+        <div class="snake-copy">
+          <div class="tag">Season 4</div>
+          The mirror turns to leaders. Not "be a better leader," but "the way you show up is already teaching your team what's allowed." Role-modelling, trust, silence, and the humility of adapting.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DEEP DIVES ═══ -->
+<section class="deep">
+  <div class="container">
+    <div class="section-eyebrow">Season by Season</div>
+    <h2 class="section-title">The brave moments,<br>in their own words.</h2>
+    <p class="section-lede">Open any season to see the narrative arc, a standout question that shows Wayne's craft, and one verbatim quote from every guest who appeared.</p>
+
+    <!-- ─── S1 ─── -->
+    <article class="season-card" id="s1">
+      <div class="season-head">
+        <div class="season-num">01</div>
+        <div class="season-head-main">
+          <h4>Break the Silence</h4>
+          <p>Season 1 · 7 guests · The first brave step</p>
+        </div>
+        <div class="season-toggle">+</div>
+      </div>
+      <div class="season-body"><div class="season-body-inner">
+
+        <p class="season-narrative">Season 1 didn't try to solve anything. It tried to make space. Fonterra people told stories they'd never said out loud at work — loss, depression, the weight of carrying it alone. The bravery isn't in the answers; it's in the fact that anyone showed up to answer at all.</p>
+
+        <div class="wayne-block">
+          <div class="eyebrow">A question that cut through</div>
+          <q>So when was the moment you realised you couldn't keep carrying this on your own?</q>
+          <div class="attr">— Wayne, Host</div>
+        </div>
+
+        <div class="cloud-block">
+          <div class="block-title">What this season kept coming back to</div>
+          <div class="cloud">
+            <span style="left:50%; top:45%; font-size:52px;">silence</span>
+            <span class="alt" style="left:22%; top:25%; font-size:34px;">shame</span>
+            <span style="left:78%; top:28%; font-size:30px;">loss</span>
+            <span class="alt light" style="left:15%; top:55%; font-size:22px;">weight</span>
+            <span style="left:82%; top:58%; font-size:26px;">okay</span>
+            <span class="light" style="left:30%; top:78%; font-size:20px;">burden</span>
+            <span class="alt" style="left:68%; top:80%; font-size:24px;">kind</span>
+            <span class="light" style="left:50%; top:18%; font-size:18px;">hidden</span>
+            <span style="left:50%; top:72%; font-size:22px;">story</span>
+            <span class="alt light" style="left:88%; top:42%; font-size:18px;">unburdened</span>
+            <span class="light" style="left:12%; top:42%; font-size:18px;">alone</span>
+          </div>
+        </div>
+
+        <div class="quotes-block">
+          <div class="block-title">Guest voices</div>
+          <button class="quotes-toggle">See the quotes — one per guest <span class="arrow">▾</span></button>
+          <div class="quotes-list">
+            <div class="quote-card"><q>It's okay to not be okay. I mean, it is. So, yeah — be kind to yourself, I think.</q><div class="who">Michelle</div></div>
+            <div class="quote-card"><q>I just realised that life was just rubbish. I've got to change.</q><div class="who">Craig</div></div>
+            <div class="quote-card"><q>I should have been more open with Ro. I would just would have started the conversation a lot earlier. It doesn't have to be big before you start talking about an issue. It just feels so much better to have it out.</q><div class="who">Rob</div></div>
+            <div class="quote-card"><q>There's nothing better than being able to be yourself at work, right? I can be me. And that, if everyone eventually can say that, we've done a bloody good thing here at Fonterra.</q><div class="who">Rene</div></div>
+            <div class="quote-card"><q>You don't have to have experience in these tough times. Just be there and just try to be there for people.</q><div class="who">Sarah</div></div>
+            <div class="quote-card"><q>A support network is not someone that just agrees with your view. If we just have everyone that's going to agree with us, then guess what? We're never going to grow.</q><div class="who">Jeff</div></div>
+            <div class="quote-card"><q>The moment I shared my story with the people who are genuinely close friends to me, I kind of felt unburdened. It was like this weight was lifted off my shoulders — the dirty little secret.</q><div class="who">Kathy</div></div>
+          </div>
+        </div>
+
+      </div></div>
+    </article>
+
+    <!-- ─── S2 ─── -->
+    <article class="season-card" id="s2">
+      <div class="season-head">
+        <div class="season-num">02</div>
+        <div class="season-head-main">
+          <h4>Identity &amp; Rebuilding</h4>
+          <p>Season 2 · 5 guests · From disclosure to reconstruction</p>
+        </div>
+        <div class="season-toggle">+</div>
+      </div>
+      <div class="season-body"><div class="season-body-inner">
+
+        <p class="season-narrative">If Season 1 was about breaking silence, Season 2 was about what you do next. Guests stopped asking whether they could talk and started asking who they wanted to become afterwards. The stories got more specific, the pain more named, and the hope more earned.</p>
+
+        <div class="wayne-block">
+          <div class="eyebrow">A question that cut through</div>
+          <q>If you could sit with him now — what would you want him to know?</q>
+          <div class="attr">— Wayne, Host</div>
+        </div>
+
+        <div class="cloud-block">
+          <div class="block-title">What this season kept coming back to</div>
+          <div class="cloud">
+            <span class="alt" style="left:50%; top:42%; font-size:50px;">identity</span>
+            <span style="left:22%; top:28%; font-size:32px;">rebuild</span>
+            <span class="light" style="left:78%; top:30%; font-size:28px;">father</span>
+            <span class="alt light" style="left:18%; top:58%; font-size:22px;">balance</span>
+            <span style="left:82%; top:60%; font-size:26px;">open up</span>
+            <span class="light" style="left:32%; top:80%; font-size:20px;">normal</span>
+            <span class="alt" style="left:68%; top:80%; font-size:24px;">together</span>
+            <span class="light" style="left:50%; top:18%; font-size:18px;">messy</span>
+            <span style="left:50%; top:72%; font-size:22px;">honest</span>
+            <span class="alt light" style="left:88%; top:45%; font-size:18px;">love</span>
+            <span class="light" style="left:12%; top:42%; font-size:18px;">vibe</span>
+          </div>
+        </div>
+
+        <div class="quotes-block">
+          <div class="block-title">Guest voices</div>
+          <button class="quotes-toggle">See the quotes — one per guest <span class="arrow">▾</span></button>
+          <div class="quotes-list">
+            <div class="quote-card"><q>I would tell him that I love him. That would be the first thing I would say. And the second would be — I know that life isn't going well, but I promise that together we can make it better.</q><div class="who">Kahla</div></div>
+            <div class="quote-card"><q>If you open up, if you start the conversation with someone, get the vibe of how they are, they'll open up to you, you can open up to them, and it makes for an easy conversation.</q><div class="who">Rohan</div></div>
+            <div class="quote-card"><q>I love and inspire to be that balance. Work or at home, you're the same person. I know I'm not. And I'm working on that because there's a good person on both sides.</q><div class="who">Mark</div></div>
+            <div class="quote-card"><q>She said — you know what you're going through, what you've been through is completely normal. And it's okay to get emotional about it.</q><div class="who">Pat</div></div>
+            <div class="quote-card"><q>If I can't have this conversation with someone that I've known for the better part of 20 years, why can't I have it with someone that I've known for the better part of 20 seconds?</q><div class="who">Pete</div></div>
+          </div>
+        </div>
+
+      </div></div>
+    </article>
+
+    <!-- ─── S3 ─── -->
+    <article class="season-card" id="s3">
+      <div class="season-head">
+        <div class="season-num">03</div>
+        <div class="season-head-main">
+          <h4>Tools &amp; Prevention</h4>
+          <p>Season 3 · 6 guests · From story to practice</p>
+        </div>
+        <div class="season-toggle">+</div>
+      </div>
+      <div class="season-body"><div class="season-body-inner">
+
+        <p class="season-narrative">Season 3 pivoted. Instead of "here's what happened to me," guests brought something closer to "here's what actually helps." Financial wellbeing, physical health, stoic thinking, self-kindness. The podcast stopped being only a confessional and started being a toolkit.</p>
+
+        <div class="wayne-block">
+          <div class="eyebrow">A question that cut through</div>
+          <q>So what's the smallest thing someone could do tomorrow that would actually make a difference?</q>
+          <div class="attr">— Wayne, Host</div>
+        </div>
+
+        <div class="cloud-block">
+          <div class="block-title">What this season kept coming back to</div>
+          <div class="cloud">
+            <span style="left:50%; top:42%; font-size:50px;">practice</span>
+            <span class="alt" style="left:22%; top:28%; font-size:32px;">prevent</span>
+            <span style="left:78%; top:30%; font-size:26px;">savings</span>
+            <span class="alt light" style="left:18%; top:58%; font-size:22px;">spot fire</span>
+            <span style="left:82%; top:60%; font-size:28px;">stoic</span>
+            <span class="light" style="left:32%; top:80%; font-size:20px;">kind</span>
+            <span class="alt" style="left:68%; top:80%; font-size:24px;">physical</span>
+            <span class="light" style="left:50%; top:18%; font-size:18px;">objective</span>
+            <span style="left:50%; top:72%; font-size:22px;">hard things</span>
+            <span class="alt light" style="left:88%; top:45%; font-size:18px;">ask</span>
+            <span class="light" style="left:12%; top:42%; font-size:18px;">tools</span>
+          </div>
+        </div>
+
+        <div class="quotes-block">
+          <div class="block-title">Guest voices</div>
+          <button class="quotes-toggle">See the quotes — one per guest <span class="arrow">▾</span></button>
+          <div class="quotes-list">
+            <div class="quote-card"><q>It's much easier to put out the spot fires as they're coming up, than wait till your house is burning down.</q><div class="who">Belinda</div></div>
+            <div class="quote-card"><q>I would say more of what I do is about the mental health side and emotional side, but what comes from that are really good physical results.</q><div class="who">Diane</div></div>
+            <div class="quote-card"><q>Doing hard things sometimes, you know, helps us when we face other challenges in life.</q><div class="who">Tim</div></div>
+            <div class="quote-card"><q>We do have to be kind to ourselves.</q><div class="who">Vicki</div></div>
+            <div class="quote-card"><q>The easiest place for you to improve your savings capacity is to gain a pay rise. And to bank it. But a lot of people are scared to ask.</q><div class="who">Steve</div></div>
+            <div class="quote-card"><q>I argue, Wayne, that we actually can't be objective about our own lives at any time. No matter how emotionally intelligent you think you might be — please don't fall into that trap.</q><div class="who">Cate</div></div>
+          </div>
+        </div>
+
+      </div></div>
+    </article>
+
+    <!-- ─── S4 ─── -->
+    <article class="season-card" id="s4">
+      <div class="season-head">
+        <div class="season-num">04</div>
+        <div class="season-head-main">
+          <h4>Leadership as Practice</h4>
+          <p>Season 4 · 6 guests · The mirror turns to leaders</p>
+        </div>
+        <div class="season-toggle">+</div>
+      </div>
+      <div class="season-body"><div class="season-body-inner">
+
+        <p class="season-narrative">By Season 4, the conversation matured into something harder. It wasn't "be a better leader" — it was "the way you show up is already teaching your team what's allowed." Silence as a leadership act. Role-modelling as the real policy. The bravest move yet: asking leaders to see themselves.</p>
+
+        <div class="wayne-block">
+          <div class="eyebrow">A question that cut through</div>
+          <q>If your team watched you this week — what would they say you were really telling them was okay?</q>
+          <div class="attr">— Wayne, Host</div>
+        </div>
+
+        <div class="cloud-block">
+          <div class="block-title">What this season kept coming back to</div>
+          <div class="cloud">
+            <span class="alt" style="left:50%; top:42%; font-size:54px;">role model</span>
+            <span style="left:22%; top:26%; font-size:30px;">trust</span>
+            <span class="light" style="left:78%; top:28%; font-size:28px;">adapt</span>
+            <span class="alt light" style="left:18%; top:58%; font-size:22px;">behaviour</span>
+            <span style="left:82%; top:60%; font-size:26px;">show up</span>
+            <span class="light" style="left:32%; top:80%; font-size:20px;">silence</span>
+            <span class="alt" style="left:68%; top:80%; font-size:24px;">freedom</span>
+            <span class="light" style="left:50%; top:18%; font-size:18px;">box</span>
+            <span style="left:50%; top:72%; font-size:22px;">learn</span>
+            <span class="alt light" style="left:88%; top:45%; font-size:18px;">right</span>
+            <span class="light" style="left:12%; top:42%; font-size:18px;">example</span>
+          </div>
+        </div>
+
+        <div class="quotes-block">
+          <div class="block-title">Guest voices</div>
+          <button class="quotes-toggle">See the quotes — one per guest <span class="arrow">▾</span></button>
+          <div class="quotes-list">
+            <div class="quote-card"><q>People watch to see what you're doing. And people look for role models. You are telling me to go home at a certain time — but you are still working really late.</q><div class="who">Suzie</div></div>
+            <div class="quote-card"><q>Credibility comes through continuing to learn and adapt. Earning trust is about continuing to show up, delivering on promises and being pragmatic.</q><div class="who">Justin</div></div>
+            <div class="quote-card"><q>As leaders we forget that our behaviours actually show other people how they need to show up. You are setting the example that everybody else should show up as.</q><div class="who">Renee</div></div>
+            <div class="quote-card"><q>You spend more time keeping the walls of the box up than dealing with the issue. If you've got the freedom to deal with the issue, you can turn to a positive approach.</q><div class="who">Brent</div></div>
+            <div class="quote-card"><q>It comes back to being right — and it's a silly way to live.</q><div class="who">Jorja</div></div>
+            <div class="quote-card"><q>Quite often the most powerful thing to do as a leader is to not speak at all.</q><div class="who">David</div></div>
+          </div>
+        </div>
+
+      </div></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══ OUTRO ═══ -->
+<section class="outro">
+  <h2>Four seasons in, the conversation isn't winding down. It's opening up.</h2>
+  <p>What started as breaking the silence has become a practice — one the business keeps getting better at, one episode at a time.</p>
+  <div class="mark">Healthy Minds · A Fonterra Podcast · Produced by VidPod</div>
+</section>
+
+<script>
+  // Season expand/collapse
+  document.querySelectorAll('.season-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.season-card').classList.toggle('open');
+    });
+  });
+  // Quotes dropdown
+  document.querySelectorAll('.quotes-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.quotes-block').classList.toggle('open');
+    });
+  });
+  // Nav scroll + auto-open
+  const navBtns = document.querySelectorAll('.nav-btn');
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (target) {
+        if (target.classList.contains('season-card')) {
+          target.classList.add('open');
+        }
+        const y = target.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      navBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
